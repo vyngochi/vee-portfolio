@@ -12,6 +12,10 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 Portfolio cá nhân của một Frontend Engineer (animation, 3D, design system). Style: hero là khung bo góc với gradient xanh nhiễu hạt chạy bằng shader, headline cỡ lớn có một cụm chữ nghiêng serif màu accent, phía dưới là lưới bento các widget tương tác. Bản mẫu tham khảo: `demo/style-demo.html` (HTML tĩnh, không phải code của app).
 
+## Tiến độ
+
+`docs/ROADMAP.md` là nguồn sự thật về tiến độ. **Trước khi bắt đầu** đọc roadmap để biết việc tiếp theo và việc đang chờ chủ dự án. **Khi xong một việc**, tick nó trong roadmap ở cùng commit, ghi mã việc vào commit message (ví dụ `feat(nav): mobile menu [P1.3]`). Quyết định kiến trúc mới thì thêm một dòng vào "Nhật ký quyết định".
+
 ## Stack
 
 - Next.js 16 (App Router, thư mục `src/`), React 19, TypeScript strict
@@ -53,6 +57,7 @@ src/styles/tokens.css    Design token (nguồn sự thật)
 src/styles/tokens.ts     Bản JS của token cho shader / GSAP / Framer Motion
 public/images/           Ảnh, quy tắc đặt tên ở docs/IMAGES.md
 docs/DESIGN.md           Quy tắc thiết kế chi tiết
+docs/ROADMAP.md          Kế hoạch triển khai và tiến độ
 ```
 
 ## Quy tắc bắt buộc

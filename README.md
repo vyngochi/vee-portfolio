@@ -26,6 +26,7 @@ Ví dụ: `npx shadcn@latest add @react-bits/SplitText-TS-TW`. File được t�
 ```
 ├── demo/                  Bản demo style (HTML tĩnh, chỉ để tham khảo)
 ├── docs/
+│   ├── ROADMAP.md         Kế hoạch triển khai và tiến độ
 │   ├── DESIGN.md          Design system: màu, chữ, bo góc, chuyển động
 │   ├── IMAGES.md          Hướng dẫn đặt tên và kích thước ảnh
 │   └── private/           CV gốc (gitignore, không deploy)
