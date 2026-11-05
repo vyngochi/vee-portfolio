@@ -24,10 +24,12 @@ export interface Profile {
   role: Localized;
   /** Các mảng chuyên môn, hiển thị dạng nhãn nhỏ ở hero */
   focus: string[];
+  /** Một câu giới thiệu dưới tên ở hero; accent hiển thị bằng chữ nghiêng serif màu emphasis */
+  tagline: Localized<{ lead: string; accent: string; tail?: string }>;
+  /** Chữ trang trí cực lớn nằm sau ảnh chân dung ở hero (chỉ để trang trí, không đọc bởi trình đọc màn hình) */
+  heroWord: string;
   summary: Localized;
   location?: Localized;
-  /** Trạng thái nhận việc, hiển thị ở hero và footer */
-  availability: Localized;
   email: string;
   socials: SocialLink[];
   /** Đường dẫn file CV công khai trong public/, ví dụ "/cv/ngo-chi-vy-cv.pdf" */

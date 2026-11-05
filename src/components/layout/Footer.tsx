@@ -1,31 +1,32 @@
 import { ArrowUp, ArrowUpRight } from "lucide-react";
 import { profile } from "@/content/profile";
-import { t } from "@/i18n/config";
-import { getDictionary, getLocale } from "@/i18n/server";
+import { getDictionary } from "@/i18n/server";
 import { TOP_ID } from "@/lib/sections";
 import { Container } from "./Container";
 import { CurrentYear } from "./CurrentYear";
 
 export async function Footer() {
-  const locale = await getLocale();
   const dict = await getDictionary();
 
   return (
     <footer className="mt-auto border-t border-border">
       <Container className="grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_auto] md:items-end">
         <div className="flex flex-col gap-3">
-          <p className="text-eyebrow uppercase text-muted-foreground">{dict.footer.getInTouch}</p>
+          <p className="text-eyebrow uppercase text-muted-foreground">
+            {dict.footer.getInTouch}
+          </p>
           <a
             href={`mailto:${profile.email}`}
             className="w-fit break-all text-title underline decoration-border decoration-1 underline-offset-8 transition-colors hover:decoration-primary"
           >
             {profile.email}
           </a>
-          <p className="text-sm text-muted-foreground">{t(profile.availability, locale)}</p>
         </div>
 
         <div className="flex flex-col gap-3">
-          <p className="text-eyebrow uppercase text-muted-foreground">{dict.footer.elsewhere}</p>
+          <p className="text-eyebrow uppercase text-muted-foreground">
+            {dict.footer.elsewhere}
+          </p>
           <ul className="flex flex-col gap-2">
             {profile.socials.map((social) => (
               <li key={social.href}>

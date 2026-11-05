@@ -26,6 +26,10 @@ export const en = {
   language: {
     label: "Language",
   },
+  hero: {
+    scroll: "Scroll to explore",
+    portraitAlt: "Portrait of {name}",
+  },
   sections: {
     about: { lead: "A little", accent: "about me" },
     work: { lead: "Selected", accent: "work" },

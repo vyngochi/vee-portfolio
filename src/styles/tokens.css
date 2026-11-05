@@ -87,6 +87,8 @@
 
   --grain-opacity: 0.35;
   --grain-blend: soft-light;
+  /* Bóng mềm sau ảnh chân dung: ở light giúp áo trắng tách khỏi nền sương xanh */
+  --portrait-shadow: drop-shadow(0 24px 36px rgb(30 60 140 / 0.28)) drop-shadow(0 2px 6px rgb(30 60 140 / 0.12));
   --shadow-hero-value: 0 40px 80px -40px rgb(30 50 100 / 0.28);
   --shadow-float-value: 0 24px 48px -20px rgb(30 50 100 / 0.3);
 
@@ -150,6 +152,7 @@
 
   --grain-opacity: 0.2;
   --grain-blend: overlay;
+  --portrait-shadow: drop-shadow(0 30px 50px rgb(0 0 0 / 0.55));
   --shadow-hero-value: 0 50px 100px -40px rgb(0 0 0 / 0.8);
   --shadow-float-value: 0 30px 60px -20px rgb(0 0 0 / 0.7);
 
@@ -214,8 +217,18 @@
   --font-sans: var(--font-manrope), "Segoe UI", system-ui, sans-serif;
   --font-serif: var(--font-playfair), Georgia, serif;
   --font-mono: var(--font-jetbrains), Consolas, monospace;
+  /* font-poster: chỉ cho chữ trang trí cực lớn (đậm, hẹp, font tĩnh nên vẽ viền không lộ nét chồng) */
+  --font-poster: var(--font-anton), Impact, "Arial Narrow", sans-serif;
 
   /* Thang chữ: text-display, text-headline, text-title, text-eyebrow */
+  /*
+   * text-hero: chỉ dùng cho tên ở hero. Đơn vị cqi tính theo bề rộng KHUNG HERO (khung có class @container),
+   * không theo màn hình, nên tên luôn vừa cột trái và không bao giờ chạm ảnh chân dung.
+   */
+  --text-hero: clamp(3.5rem, 9.5cqi, 10rem);
+  --text-hero--line-height: 0.9;
+  --text-hero--letter-spacing: -0.06em;
+  --text-hero--font-weight: 600;
   --text-display: clamp(3.5rem, 11.5vw, 10.5rem);
   --text-display--line-height: 0.9;
   --text-display--letter-spacing: -0.055em;

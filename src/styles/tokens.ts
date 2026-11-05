@@ -37,6 +37,16 @@ export const themeColors = {
   },
 } as const satisfies Record<ThemeName, Record<string, string>>;
 
+/**
+ * Bảng màu cho shader gradient ở hero, từ "nền" (c0) tới "điểm sáng nhất" (c3).
+ * Light: sương trắng → xanh đậm dần; dark: đen → xanh phát sáng.
+ * c0 trùng với --hero-to để mép shader hoà vào fallback CSS.
+ */
+export const heroShaderPalette = {
+  light: { c0: "#f5f6fa", c1: "#c8d8fb", c2: "#7aa5f5", c3: "#2f66e0", grain: 0.05 },
+  dark: { c0: "#000000", c1: "#061e57", c2: "#1a7af2", c3: "#6b94d1", grain: 0.09 },
+} as const satisfies Record<ThemeName, { c0: string; c1: string; c2: string; c3: string; grain: number }>;
+
 /** Bộ màu accent cho người xem tự đổi (widget design token trong bento). */
 export const accentPresets = [
   { name: "Cam", value: "#ffa800" },

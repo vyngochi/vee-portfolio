@@ -24,6 +24,10 @@ export const vi: Dictionary = {
   language: {
     label: "Ngôn ngữ",
   },
+  hero: {
+    scroll: "Cuộn để xem tiếp",
+    portraitAlt: "Ảnh chân dung của {name}",
+  },
   sections: {
     about: { lead: "Một chút", accent: "về mình" },
     work: { lead: "Dự án", accent: "chọn lọc" },

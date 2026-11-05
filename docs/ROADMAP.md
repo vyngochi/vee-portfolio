@@ -12,18 +12,18 @@ Kế hoạch triển khai và theo dõi tiến độ toàn dự án. **Đây là
 
 ## Tổng quan
 
-| Giai đoạn | Nội dung | Trạng thái |
-|---|---|---|
-| P0 | Nền tảng | ✅ Xong |
-| P1 | Khung trang: layout, Nav, Footer | ✅ Xong |
-| P2 | Hero: headline + shader gradient | ⬜ Tiếp theo |
-| P3 | About / Bento | ⬜ |
-| P4 | Projects: danh sách, BrowserFrame, trang chi tiết | ⬜ |
-| P5 | Experience & Activities | ⬜ |
-| P6 | Contact | ⬜ |
-| P7 | SEO & metadata | ⬜ |
-| P8 | Chất lượng: a11y, hiệu năng, kiểm thử | ⬜ |
-| P9 | Deploy | ⬜ |
+| Giai đoạn | Nội dung                                          | Trạng thái   |
+| --------- | ------------------------------------------------- | ------------ |
+| P0        | Nền tảng                                          | ✅ Xong      |
+| P1        | Khung trang: layout, Nav, Footer                  | ✅ Xong      |
+| P2        | Hero: headline + shader gradient                  | ⬜ Tiếp theo |
+| P3        | About / Bento                                     | ⬜           |
+| P4        | Projects: danh sách, BrowserFrame, trang chi tiết | ⬜           |
+| P5        | Experience & Activities                           | ⬜           |
+| P6        | Contact                                           | ⬜           |
+| P7        | SEO & metadata                                    | ⬜           |
+| P8        | Chất lượng: a11y, hiệu năng, kiểm thử             | ⬜           |
+| P9        | Deploy                                            | ⬜           |
 
 Thứ tự trang chủ: **Hero → About (bento) → Projects → Experience → Contact → Footer**.
 
@@ -59,22 +59,23 @@ Mục tiêu: trang chủ có khung hoàn chỉnh với các section rỗng, đi�
 
 ---
 
-## P2 · Hero
+## P2 · Hero ✅
 
 Mục tiêu: điểm "wow" của trang, tham khảo `demo/style-demo.html`.
 
-- [ ] **P2.1** Bố cục: khung `rounded-hero` + `grain` + `shadow-hero`, headline `text-display` so le hai dòng, cụm `text-serif-accent`, dãy thông tin `text-eyebrow`, scroll cue
-- [ ] **P2.2** Nền gradient CSS theo token `hero-from/via/to`: là bản tĩnh và cũng là fallback
-- [ ] **P2.3** Shader gradient nhiễu hạt (Three.js, fragment shader fbm), nạp bằng `next/dynamic` với `ssr: false`
-- [ ] **P2.4** Shader theo theme: đọc `themeColors` trong `tokens.ts`, đổi màu mượt khi đổi theme
-- [ ] **P2.5** Tương tác chuột: ánh sáng đi theo con trỏ (lerp); trên cảm ứng thì tự trôi
-- [ ] **P2.6** Hiệu năng: dừng render khi hero ra khỏi màn hình hoặc tab ẩn, giới hạn pixel ratio, giảm độ phân giải trên mobile
-- [ ] **P2.7** `prefers-reduced-motion`: shader đứng yên ở một khung đẹp, headline không chạy animation
-- [ ] **P2.8** Headline hiện ra bằng animation `rise` (hoặc SplitText của React Bits), chữ luôn đọc được kể cả khi JS chưa chạy
+- [x] **P2.1** Bố cục: khung `rounded-hero` + `grain` + `shadow-hero`, headline `text-display` so le hai dòng, cụm `text-serif-accent`, dãy thông tin `text-eyebrow`, scroll cue
+- [x] **P2.2** Nền gradient CSS theo token `hero-from/via/to`: là bản tĩnh và cũng là fallback
+- [x] **P2.3** Shader gradient nhiễu hạt bằng WebGL thuần (fragment shader fbm), không dùng thư viện
+- [x] **P2.4** Shader theo theme: đọc `themeColors` trong `tokens.ts`, đổi màu mượt khi đổi theme
+- [x] **P2.5** Tương tác chuột: ánh sáng đi theo con trỏ (lerp); trên cảm ứng thì tự trôi
+- [x] **P2.6** Hiệu năng: dừng render khi hero ra khỏi màn hình hoặc tab ẩn, giới hạn pixel ratio, giảm độ phân giải trên mobile
+- [x] **P2.7** `prefers-reduced-motion`: shader đứng yên ở một khung đẹp, headline không chạy animation
+- [x] **P2.8** Headline hiện ra bằng animation `rise` (CSS), chữ luôn đọc được kể cả khi JS chưa chạy
+- [x] **P2.9** Ảnh chân dung tách nền trong hero. Tên một khối một màu ở cột trái (không bao giờ bị ảnh che), chữ trang trí "FRONTEND" nằm sau người, tagline có cụm serif nhấn, parallax theo chuột
 
 **Tiêu chí xong:** đẹp ở cả hai theme; tắt JS vẫn thấy hero tĩnh đầy đủ chữ; shader không làm tụt FPS khi cuộn trên laptop tầm trung.
 
-**Quyết định cần chốt:** Three.js thuần (nhẹ hơn, đủ cho một shader phẳng) hay React Three Fiber (tiện nếu sau này thêm scene 3D). Đề xuất: **Three.js thuần** cho hero; R3F chỉ khi làm scene 3D ở P4.
+**Đã chốt:** hero dùng **WebGL thuần** (một shader phẳng không cần Three.js, nhẹ hơn khoảng 150 KB). Three.js / R3F để dành cho scene 3D ở P4 nếu làm.
 
 ---
 
@@ -174,33 +175,37 @@ Mục tiêu: khoe dự án thật, có khung xem web động và trang chi tiế
 
 ## Chờ chủ dự án ⏳
 
-| Việc | Cần cho | Ghi chú |
-|---|---|---|
-| Tên có dấu | P1, P2 | CV viết "Ngo Chi Vy" |
-| Thành phố | P3.7 | Có thể bỏ thẻ giờ địa phương nếu không muốn công khai |
-| Link BeeWise | P4.5 | Nếu sản phẩm được công khai |
-| Ảnh chân dung | P3 | `profile/portrait.jpg`, `avatar.jpg` |
-| Ảnh + video dự án | P4.8 | Xem `docs/IMAGES.md` |
-| Chọn cách liên hệ | P6.3 | Formspree / Web3Forms / chỉ email |
-| CV công khai | P6.4 | Bản PDF không có số điện thoại |
-| Duyệt bản tiếng Việt | P8.6 | Toàn bộ `vi` trong `src/content/` và `src/i18n/dictionaries/vi.ts` |
-| Tên miền | P9.3 | |
+| Việc                 | Cần cho | Ghi chú                                                            |
+| -------------------- | ------- | ------------------------------------------------------------------ |
+| Tên có dấu           | P1, P2  | CV viết "Ngo Chi Vy"                                               |
+| Thành phố            | P3.7    | Có thể bỏ thẻ giờ địa phương nếu không muốn công khai              |
+| Link BeeWise         | P4.5    | Nếu sản phẩm được công khai                                        |
+| Ảnh chân dung        | P3      | `profile/portrait.jpg`, `avatar.jpg`                               |
+| Ảnh + video dự án    | P4.8    | Xem `docs/IMAGES.md`                                               |
+| Chọn cách liên hệ    | P6.3    | Formspree / Web3Forms / chỉ email                                  |
+| CV công khai         | P6.4    | Bản PDF không có số điện thoại                                     |
+| Duyệt bản tiếng Việt | P8.6    | Toàn bộ `vi` trong `src/content/` và `src/i18n/dictionaries/vi.ts` |
+| Tên miền             | P9.3    |                                                                    |
 
 ---
 
 ## Nhật ký quyết định
 
-| Ngày | Quyết định | Lý do |
-|---|---|---|
-| 2026-11-05 | Next.js thay vì Astro | Chứng minh stack nhà tuyển dụng hay yêu cầu, AI vibe code ổn định |
-| 2026-11-05 | Style: hero gradient nhiễu hạt + bento + design system | Kết hợp ảnh tham khảo với ba thế mạnh animation, 3D, design system |
-| 2026-11-05 | Hai theme, light mặc định, hero theo theme | Dễ đọc với nhà tuyển dụng; hero giữ điểm nhấn ở cả hai theme |
-| 2026-11-05 | Playfair Display thay Instrument Serif | Instrument Serif không có dấu tiếng Việt |
-| 2026-11-05 | Emphasis light `#e85d04` | Tươi hơn; chỉ dùng cho chữ lớn vì tương phản 3.2:1 |
-| 2026-11-05 | Gói `cn` của shadcn thay clsx + tailwind-merge | Mặc định của shadcn CLI mới |
-| 2026-11-05 | i18n tự làm, `/` tiếng Anh, `/vi` tiếng Việt, không tự đoán ngôn ngữ | Không cần thư viện; một URL cho mỗi ngôn ngữ, tốt cho SEO |
-| 2026-11-05 | Bỏ next-themes, dùng inline script | next-themes gây cảnh báo script tag với React 19 |
-| 2026-11-06 | Smooth scroll bằng CSS, chưa dùng Lenis | Đủ cho link neo; Lenis chỉ khi cần đồng bộ animation theo scroll |
-| 2026-11-06 | Menu mobile dùng `<dialog>` gốc | Trình duyệt lo sẵn focus trap, Esc, trả focus |
-| 2026-11-06 | 404 song ngữ qua `[lang]/[...rest]` + `instant = false` | Giữ Nav, Footer, theme; tắt kiểm tra instant cho route chỉ báo 404 |
-| 2026-11-05 | Dữ liệu là file TS trong `src/content/`, không backend | Đủ cho portfolio, có kiểu, dễ nâng lên Keystatic sau |
+| Ngày       | Quyết định                                                           | Lý do                                                              |
+| ---------- | -------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| 2026-11-05 | Next.js thay vì Astro                                                | Chứng minh stack nhà tuyển dụng hay yêu cầu, AI vibe code ổn định  |
+| 2026-11-05 | Style: hero gradient nhiễu hạt + bento + design system               | Kết hợp ảnh tham khảo với ba thế mạnh animation, 3D, design system |
+| 2026-11-05 | Hai theme, light mặc định, hero theo theme                           | Dễ đọc với nhà tuyển dụng; hero giữ điểm nhấn ở cả hai theme       |
+| 2026-11-05 | Playfair Display thay Instrument Serif                               | Instrument Serif không có dấu tiếng Việt                           |
+| 2026-11-05 | Emphasis light `#e85d04`                                             | Tươi hơn; chỉ dùng cho chữ lớn vì tương phản 3.2:1                 |
+| 2026-11-05 | Gói `cn` của shadcn thay clsx + tailwind-merge                       | Mặc định của shadcn CLI mới                                        |
+| 2026-11-05 | i18n tự làm, `/` tiếng Anh, `/vi` tiếng Việt, không tự đoán ngôn ngữ | Không cần thư viện; một URL cho mỗi ngôn ngữ, tốt cho SEO          |
+| 2026-11-05 | Bỏ next-themes, dùng inline script                                   | next-themes gây cảnh báo script tag với React 19                   |
+| 2026-11-06 | Hero có ảnh chân dung tách nền | Gương mặt dễ nhớ |
+| 2026-11-06 | Tên không nằm sau ảnh; chiều sâu chuyển sang chữ trang trí, cỡ tên theo container query (cqi) | Tên là thông tin quan trọng nhất: phải đọc trọn, một màu, ở mọi kích thước màn hình |
+| 2026-11-06 | Shader hero bằng WebGL thuần | Một shader phẳng không cần Three.js; nhẹ hơn khoảng 150 KB |
+| 2026-11-06 | Ảnh tách nền dùng `unoptimized` | Bộ tối ưu ảnh của Next trả JPEG, làm mất nền trong suốt |
+| 2026-11-06 | Smooth scroll bằng CSS, chưa dùng Lenis                              | Đủ cho link neo; Lenis chỉ khi cần đồng bộ animation theo scroll   |
+| 2026-11-06 | Menu mobile dùng `<dialog>` gốc                                      | Trình duyệt lo sẵn focus trap, Esc, trả focus                      |
+| 2026-11-06 | 404 song ngữ qua `[lang]/[...rest]` + `instant = false`              | Giữ Nav, Footer, theme; tắt kiểm tra instant cho route chỉ báo 404 |
+| 2026-11-05 | Dữ liệu là file TS trong `src/content/`, không backend               | Đủ cho portfolio, có kiểu, dễ nâng lên Keystatic sau               |

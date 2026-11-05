@@ -28,6 +28,23 @@
   color: var(--emphasis);
 }
 
+/*
+ * Lớp parallax: lệch theo chuột với độ sâu --depth (px khi chuột ở mép khung).
+ * --px, --py (-1..1) do HeroFrame đặt; không có JS hoặc giảm chuyển động thì bằng 0 (đứng yên).
+ */
+@utility parallax-layer {
+  transform: translate3d(
+    calc(var(--px, 0) * var(--depth, 0) * 1px),
+    calc(var(--py, 0) * var(--depth, 0) * 1px),
+    0
+  );
+}
+
+/* Bóng đổ mềm cho ảnh chân dung tách nền, đổi theo theme */
+@utility portrait-shadow {
+  filter: var(--portrait-shadow);
+}
+
 /* Đổi theme bằng View Transitions: tắt crossfade mặc định, hiệu ứng lan tròn do ThemeToggle chạy */
 ::view-transition-old(root),
 ::view-transition-new(root) {

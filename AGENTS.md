@@ -89,6 +89,16 @@ docs/ROADMAP.md          Kế hoạch triển khai và tiến độ
 - Route chỉ để báo lỗi (như `[lang]/[...rest]`) export `instant = false` để tắt kiểm tra instant navigation.
 - Dev overlay báo "Issue" thì phải xử lý, không bỏ qua.
 
+### WebGL / shader
+- Hero dùng WebGL thuần (`src/components/three/HeroShader.tsx`, shader trong `src/shaders/*.ts`). Chỉ thêm Three.js / R3F khi làm scene 3D thật.
+- **Chuỗi GLSL chỉ chứa ký tự ASCII**, kể cả comment. Có dấu tiếng Việt là shader không biên dịch được.
+- Không gọi `WEBGL_lose_context.loseContext()` khi cleanup: Strict Mode chạy effect hai lần trên cùng canvas, lần sau sẽ nhận context đã chết.
+- Mọi canvas phải: dừng vẽ khi ra khỏi màn hình / tab ẩn, giới hạn pixel ratio, có fallback CSS khi không có WebGL, đứng yên khi giảm chuyển động.
+
+### Ảnh trong suốt
+- Ảnh PNG/WebP có nền trong suốt dùng `next/image` với `unoptimized` (bộ tối ưu của Next đang trả JPEG làm mất nền). Bù lại, tự cắt sát và nén file trước khi đưa vào `public/`.
+- Ảnh là phần tử lớn nhất trong khung hình đầu (LCP) thì dùng `preload` (Next 16 bỏ `priority`).
+
 ### Server / Client component
 - Mặc định là Server Component. Chỉ thêm `"use client"` ở component lá cần state, effect, sự kiện chuột hay WebGL.
 - Three.js / R3F / GSAP chỉ chạy trong Client Component. Canvas nặng thì nạp bằng `next/dynamic` với `ssr: false`.
@@ -110,7 +120,11 @@ docs/ROADMAP.md          Kế hoạch triển khai và tiến độ
 - Nội dung chưa có thì ghi rõ là dữ liệu mẫu, đừng bịa thành tích như thật.
 
 ### Font
-- Mọi font phải có subset `vietnamese` (kiểm tra trước khi thêm). Font hiện tại: Manrope (sans), Playfair Display italic (serif nhấn), JetBrains Mono (mono), nạp bằng `next/font/google` trong `src/app/layout.tsx`.
+- Mọi font phải có subset `vietnamese` (kiểm tra trước khi thêm). Font hiện tại: Manrope (sans), Playfair Display italic (serif nhấn), Anton (`font-poster`, chữ trang trí cực lớn), JetBrains Mono (mono), nạp bằng `next/font/google` trong `src/app/[lang]/layout.tsx`.
+- Chữ chỉ vẽ viền (`-webkit-text-stroke`) phải dùng **font tĩnh** (như Anton). Font biến thể (Manrope...) có nét chồng nhau, vẽ viền sẽ lộ đường thừa bên trong chữ.
+
+### Sự cố dev server trên Windows
+- Log báo `EPERM: operation not permitted, rename ... .next\dev\...` hoặc trang trả CSS cũ / `Unexpected end of JSON input`: bộ nhớ đệm `.next` bị hỏng do file bị khoá. Dừng server, xoá `.next`, chạy lại `npm run dev`. Không chạy `npm run build` khi dev server đang chạy.
 
 ### Ảnh
 - Theo `docs/IMAGES.md`: chữ thường, không dấu, nối bằng gạch ngang. Hiển thị bằng `next/image`.

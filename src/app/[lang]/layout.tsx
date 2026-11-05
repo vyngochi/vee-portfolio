@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Manrope, Playfair_Display } from "next/font/google";
+import { Anton, JetBrains_Mono, Manrope, Playfair_Display } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { InlineScript } from "@/components/layout/InlineScript";
 import { Nav } from "@/components/layout/Nav";
@@ -21,6 +21,14 @@ const playfair = Playfair_Display({
   subsets: ["latin", "vietnamese"],
   style: ["italic"],
   weight: ["400"],
+});
+
+// Font poster cho chữ trang trí cực lớn. Phải là font TĨNH: font biến thể (như Manrope) có các nét chồng nhau,
+// khi vẽ viền (text-stroke) sẽ lộ đường thừa bên trong chữ.
+const anton = Anton({
+  variable: "--font-anton",
+  subsets: ["latin", "vietnamese"],
+  weight: "400",
 });
 
 const jetbrains = JetBrains_Mono({
@@ -55,7 +63,7 @@ export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
     <html
       lang={locale}
       suppressHydrationWarning
-      className={`${manrope.variable} ${playfair.variable} ${jetbrains.variable} h-full`}
+      className={`${manrope.variable} ${playfair.variable} ${anton.variable} ${jetbrains.variable} h-full`}
     >
       <head>
         <InlineScript html={themeScript} />

@@ -2,7 +2,6 @@ import Link from "next/link";
 import { profile } from "@/content/profile";
 import { localizedPath } from "@/i18n/config";
 import { getDictionary, getLocale } from "@/i18n/server";
-import { splitName } from "@/lib/name";
 import { homeSections } from "@/lib/sections";
 import { Container } from "./Container";
 import { LanguageSwitcher } from "./LanguageSwitcher";
@@ -15,7 +14,6 @@ export async function Nav() {
   const locale = await getLocale();
   const dict = await getDictionary();
   const home = localizedPath(locale, "/");
-  const name = splitName(profile.name);
 
   const links = homeSections.map((id) => ({ href: `${home}#${id}`, label: dict.nav[id] }));
 
@@ -23,7 +21,8 @@ export async function Nav() {
     <NavShell>
       <Container className="flex h-16 items-center justify-between gap-4 sm:h-[72px]">
         <Link href={home} className="text-lg font-bold tracking-tight" aria-label={`${profile.name}, ${dict.nav.home}`}>
-          {name.lead} <span className="text-serif-accent text-xl">{name.last}</span>
+          {profile.name}
+          <span className="text-emphasis">.</span>
         </Link>
 
         <nav aria-label={dict.nav.label} className="hidden md:block">

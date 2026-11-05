@@ -46,14 +46,15 @@ Quy tắc: `emphasis` và `highlight` không đứng cạnh nhau với diện t�
 
 | Token | Cỡ | Dùng cho |
 |---|---|---|
-| `text-display` | 56 → 168px | Headline hero, một lần mỗi trang |
+| `text-hero` | 56 → 160px, theo bề rộng khung hero (`cqi`) | Chỉ cho tên ở hero. Tên luôn một màu, không tách serif, không để ảnh che |
+| `text-display` | 56 → 168px | Tiêu đề lớn (trang 404, trang chi tiết) |
 | `text-headline` | 28 → 46px | Tiêu đề section |
 | `text-title` | 24 → 44px | Tên dự án trong danh sách |
 | `text-base` | 16px | Văn bản |
 | `text-eyebrow` | 11.5px, viết hoa | Nhãn, thông tin phụ ở hero |
 | `text-serif-accent` | theo cỡ cha | Cụm chữ nghiêng màu primary |
 
-Font: **Manrope** (mọi thứ), **Playfair Display italic** (chỉ cho `text-serif-accent`), **JetBrains Mono** (code, token, số liệu kỹ thuật). Cả ba hỗ trợ tiếng Việt.
+Font: **Manrope** (mọi thứ), **Playfair Display italic** (chỉ cho `text-serif-accent`), **Anton** (`font-poster`, chỉ cho chữ trang trí cực lớn vẽ viền ở hero), **JetBrains Mono** (code, token, số liệu kỹ thuật). Cả bốn hỗ trợ tiếng Việt.
 
 > Ảnh tham khảo dùng Instrument Serif, nhưng font này không có dấu tiếng Việt nên được thay bằng Playfair Display.
 
