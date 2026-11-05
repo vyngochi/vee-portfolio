@@ -42,6 +42,12 @@
   html {
     @apply bg-background;
   }
+  /* Cuộn mượt khi bấm link neo (#about...). Tắt khi người xem bật giảm chuyển động. [P1.8] */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
   body {
     @apply bg-background text-foreground font-sans antialiased;
   }

@@ -15,8 +15,8 @@ Kế hoạch triển khai và theo dõi tiến độ toàn dự án. **Đây là
 | Giai đoạn | Nội dung | Trạng thái |
 |---|---|---|
 | P0 | Nền tảng | ✅ Xong |
-| P1 | Khung trang: layout, Nav, Footer | ⬜ Tiếp theo |
-| P2 | Hero: headline + shader gradient | ⬜ |
+| P1 | Khung trang: layout, Nav, Footer | ✅ Xong |
+| P2 | Hero: headline + shader gradient | ⬜ Tiếp theo |
 | P3 | About / Bento | ⬜ |
 | P4 | Projects: danh sách, BrowserFrame, trang chi tiết | ⬜ |
 | P5 | Experience & Activities | ⬜ |
@@ -42,18 +42,18 @@ Thứ tự trang chủ: **Hero → About (bento) → Projects → Experience →
 
 ---
 
-## P1 · Khung trang
+## P1 · Khung trang ✅
 
 Mục tiêu: trang chủ có khung hoàn chỉnh với các section rỗng, điều hướng chạy được ở mọi kích thước màn hình.
 
-- [ ] **P1.1** Component `Container` (độ rộng tối đa, lề 16px ở mobile) và `Section` (id để neo, tiêu đề dùng `text-headline` + `text-serif-accent`)
-- [ ] **P1.2** `Nav`: logo/tên, link neo tới các section, `LanguageSwitcher`, `ThemeToggle`. Dính đầu trang, nền mờ khi cuộn
-- [ ] **P1.3** Menu mobile (dưới 768px): nút mở, khoá cuộn, đóng bằng Esc, focus trap
-- [ ] **P1.4** Link "Bỏ qua đến nội dung" (skip link) cho bàn phím
-- [ ] **P1.5** `Footer`: email, mạng xã hội, ©, nút lên đầu trang
-- [ ] **P1.6** Dựng trang chủ với 5 section rỗng có tiêu đề song ngữ; xoá trang tạm hiện tại
-- [ ] **P1.7** Trang 404 song ngữ (`[lang]/not-found.tsx`)
-- [ ] **P1.8** Quyết định smooth scroll: CSS `scroll-behavior` hay Lenis (Lenis chỉ nếu P2/P4 cần đồng bộ với scroll)
+- [x] **P1.1** Component `Container` (độ rộng tối đa, lề 16px ở mobile) và `Section` (id để neo, tiêu đề dùng `text-headline` + `text-serif-accent`)
+- [x] **P1.2** `Nav`: logo/tên, link neo tới các section, `LanguageSwitcher`, `ThemeToggle`. Dính đầu trang, nền mờ khi cuộn
+- [x] **P1.3** Menu mobile (dưới 768px): nút mở, khoá cuộn, đóng bằng Esc, focus trap
+- [x] **P1.4** Link "Bỏ qua đến nội dung" (skip link) cho bàn phím
+- [x] **P1.5** `Footer`: email, mạng xã hội, ©, nút lên đầu trang
+- [x] **P1.6** Dựng trang chủ với 5 section rỗng có tiêu đề song ngữ; xoá trang tạm hiện tại
+- [x] **P1.7** Trang 404 song ngữ (`[lang]/not-found.tsx`)
+- [x] **P1.8** Smooth scroll: dùng CSS `scroll-behavior` (tắt khi reduced motion). Chỉ thêm Lenis nếu P2/P4 cần đồng bộ animation với scroll
 
 **Tiêu chí xong:** bấm link trong Nav cuộn đúng section ở cả `/` và `/vi`; menu mobile dùng được hoàn toàn bằng bàn phím; không có thanh cuộn ngang ở 375px.
 
@@ -200,4 +200,7 @@ Mục tiêu: khoe dự án thật, có khung xem web động và trang chi tiế
 | 2026-11-05 | Gói `cn` của shadcn thay clsx + tailwind-merge | Mặc định của shadcn CLI mới |
 | 2026-11-05 | i18n tự làm, `/` tiếng Anh, `/vi` tiếng Việt, không tự đoán ngôn ngữ | Không cần thư viện; một URL cho mỗi ngôn ngữ, tốt cho SEO |
 | 2026-11-05 | Bỏ next-themes, dùng inline script | next-themes gây cảnh báo script tag với React 19 |
+| 2026-11-06 | Smooth scroll bằng CSS, chưa dùng Lenis | Đủ cho link neo; Lenis chỉ khi cần đồng bộ animation theo scroll |
+| 2026-11-06 | Menu mobile dùng `<dialog>` gốc | Trình duyệt lo sẵn focus trap, Esc, trả focus |
+| 2026-11-06 | 404 song ngữ qua `[lang]/[...rest]` + `instant = false` | Giữ Nav, Footer, theme; tắt kiểm tra instant cho route chỉ báo 404 |
 | 2026-11-05 | Dữ liệu là file TS trong `src/content/`, không backend | Đủ cho portfolio, có kiểu, dễ nâng lên Keystatic sau |

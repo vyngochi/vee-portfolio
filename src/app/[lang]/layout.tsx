@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Manrope, Playfair_Display } from "next/font/google";
+import { Footer } from "@/components/layout/Footer";
+import { InlineScript } from "@/components/layout/InlineScript";
+import { Nav } from "@/components/layout/Nav";
 import { themeScript } from "@/components/layout/theme-script";
+import { ThemeSync } from "@/components/layout/ThemeSync";
+import { MAIN_ID, TOP_ID } from "@/lib/sections";
 import { localizedPath, locales } from "@/i18n/config";
 import { getDictionary, getLocale } from "@/i18n/server";
 import "../globals.css";
@@ -44,6 +49,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
   const locale = await getLocale();
+  const dict = await getDictionary();
   return (
     // suppressHydrationWarning: themeScript gắn class "dark" lên <html> trước khi React hydrate
     <html
@@ -52,9 +58,22 @@ export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
       className={`${manrope.variable} ${playfair.variable} ${jetbrains.variable} h-full`}
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <InlineScript html={themeScript} />
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body id={TOP_ID} className="min-h-full flex flex-col">
+        <a
+          href={`#${MAIN_ID}`}
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary-foreground"
+        >
+          {dict.nav.skipToContent}
+        </a>
+        <ThemeSync />
+        <Nav />
+        <main id={MAIN_ID} tabIndex={-1} className="flex flex-1 flex-col outline-none">
+          {children}
+        </main>
+        <Footer />
+      </body>
     </html>
   );
 }

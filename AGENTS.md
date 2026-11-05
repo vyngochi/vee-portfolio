@@ -45,7 +45,8 @@ src/i18n/config.ts       locales, Localized, t(), localizedPath() (dùng đượ
 src/i18n/server.ts       getLocale(), getDictionary() cho Server Component
 src/i18n/dictionaries/   Chữ giao diện: en.ts (gốc) và vi.ts
 src/lib/format.ts        Định dạng ngày theo ngôn ngữ
-src/components/layout/   Nav, Footer
+src/components/layout/   Nav, MobileMenu, Footer, Container, Section, ThemeToggle, LanguageSwitcher, theme-script
+src/lib/sections.ts      Thứ tự và id các section trang chủ (homeSections), MAIN_ID, TOP_ID
 src/components/sections/ Mỗi section của trang chủ một file: Hero, About, Projects, DesignSystem, Contact
 src/components/bento/    Widget trong lưới bento
 src/components/ui/       shadcn (được sửa thoải mái, code thuộc dự án)
@@ -82,6 +83,11 @@ docs/ROADMAP.md          Kế hoạch triển khai và tiến độ
 - Luôn tôn trọng `prefers-reduced-motion`: animation phải có trạng thái tĩnh hợp lý, shader dừng ở một khung đẹp.
 - Nội dung phải đọc được ngay khi tải. Không để text ở `opacity: 0` chờ scroll mới hiện.
 - Mỗi màn hình chỉ có một điểm "wow". Đừng chồng nhiều hiệu ứng lớn lên nhau.
+
+### Cache Components
+- `next.config.ts` bật `cacheComponents` và `partialPrefetching`. Không gọi `new Date()`, `Date.now()`, `Math.random()`, `crypto.randomUUID()` trực tiếp khi render: bọc trong `"use cache"` (giá trị tính lúc build, xem `CurrentYear.tsx`) hoặc chuyển vào effect / event handler.
+- Route chỉ để báo lỗi (như `[lang]/[...rest]`) export `instant = false` để tắt kiểm tra instant navigation.
+- Dev overlay báo "Issue" thì phải xử lý, không bỏ qua.
 
 ### Server / Client component
 - Mặc định là Server Component. Chỉ thêm `"use client"` ở component lá cần state, effect, sự kiện chuột hay WebGL.

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
@@ -62,10 +61,9 @@ function Section({ title, note, children }: { title: string; note: string; child
 
 export default function TokensPage() {
   return (
-    <main className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
+    <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
       <div className="flex items-center justify-between gap-4">
         <p className="text-eyebrow uppercase text-highlight">src/styles/tokens.css</p>
-        <ThemeToggle label="Toggle theme" />
       </div>
       <h1 className="text-display mt-3 mb-10">
         Design <span className="text-serif-accent">tokens</span>
@@ -152,6 +150,6 @@ export default function TokensPage() {
           <Button className="rounded-full px-6">Pill</Button>
         </div>
       </Section>
-    </main>
+    </div>
   );
 }
