@@ -4,7 +4,7 @@
  *   1. Primitive  (--ink-*, --amber-*...)        : bảng màu thô. KHÔNG dùng trực tiếp trong component.
  *   2. Semantic   (--background, --primary...)   : ý nghĩa, theo quy ước shadcn. Light ở :root, dark ở .dark.
  *   3. @theme     : nối semantic vào Tailwind → class bg-background, text-emphasis, font-serif...
- * Theme mặc định là light. next-themes gắn class "dark" lên <html> khi người xem chọn dark.
+ * Theme mặc định là light. Script trong <head> (src/components/layout/theme-script.ts) gắn class "dark" lên <html> khi người xem đã chọn dark.
  * Giá trị dùng trong JS (shader, GSAP) nằm ở src/styles/tokens.ts. Sửa ở đây thì sửa cả bên đó.
  */
 

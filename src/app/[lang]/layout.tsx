@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Manrope, Playfair_Display } from "next/font/google";
-import { ThemeProvider } from "@/components/layout/ThemeProvider";
+import { themeScript } from "@/components/layout/theme-script";
 import { localizedPath, locales } from "@/i18n/config";
 import { getDictionary, getLocale } from "@/i18n/server";
 import "../globals.css";
@@ -45,15 +45,16 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
   const locale = await getLocale();
   return (
-    // suppressHydrationWarning: next-themes gắn class theme lên <html> trước khi React hydrate
+    // suppressHydrationWarning: themeScript gắn class "dark" lên <html> trước khi React hydrate
     <html
       lang={locale}
       suppressHydrationWarning
       className={`${manrope.variable} ${playfair.variable} ${jetbrains.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col">
-        <ThemeProvider>{children}</ThemeProvider>
-      </body>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }

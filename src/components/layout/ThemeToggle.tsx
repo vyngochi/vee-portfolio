@@ -1,28 +1,20 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
+import { applyTheme } from "./theme-script";
 
 /**
  * Nút đổi light/dark. Theme mới lan ra thành hình tròn từ vị trí bấm (View Transitions API).
  * Trình duyệt không hỗ trợ hoặc người xem bật giảm chuyển động thì đổi ngay, không hiệu ứng.
+ * Theme hiện tại đọc thẳng từ class "dark" trên <html> (do theme-script đặt trước khi trang hiện).
  * Icon được ẩn/hiện bằng class dark: và không render thuộc tính nào phụ thuộc theme,
  * vì server không biết theme của người xem (tránh lỗi hydration).
  */
 export function ThemeToggle({ label, className }: { label: string; className?: string }) {
-  const { setTheme } = useTheme();
-
   function toggle(event: React.MouseEvent<HTMLButtonElement>) {
-    const root = document.documentElement;
-    const next = root.classList.contains("dark") ? "light" : "dark";
-
-    const apply = () => {
-      root.classList.toggle("dark", next === "dark");
-      root.classList.toggle("light", next === "light");
-      root.style.colorScheme = next;
-      setTheme(next);
-    };
+    const next = document.documentElement.classList.contains("dark") ? "light" : "dark";
+    const apply = () => applyTheme(next);
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!document.startViewTransition || reduceMotion) {
@@ -34,7 +26,7 @@ export function ThemeToggle({ label, className }: { label: string; className?: s
     const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
 
     document.startViewTransition(apply).ready.then(() => {
-      root.animate(
+      document.documentElement.animate(
         { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
         {
           duration: 650,

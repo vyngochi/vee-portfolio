@@ -19,7 +19,7 @@ Portfolio cá nhân của một Frontend Engineer (animation, 3D, design system)
 - shadcn/ui (style new-york, base Radix), dùng gói `cn` của shadcn để gộp class
 - React Bits (cài qua shadcn CLI), GSAP + `@gsap/react`
 - Chưa có backend. Mọi dữ liệu là file trong `src/content/`
-- Song ngữ Anh / Việt, tự làm theo hướng dẫn i18n của Next (không dùng thư viện), `next-themes` cho theme
+- Song ngữ Anh / Việt, tự làm theo hướng dẫn i18n của Next (không dùng thư viện). Theme cũng tự làm, không dùng `next-themes`
 
 ## Lệnh
 
@@ -63,12 +63,12 @@ docs/DESIGN.md           Quy tắc thiết kế chi tiết
 - Cụm chữ nghiêng nhấn mạnh dùng utility `text-serif-accent`, **tối đa một cụm mỗi tiêu đề**.
 - Bo góc: `rounded-card` cho card, `rounded-hero` cho hero, `rounded-full` cho nút dạng pill.
 - Cần token mới thì thêm vào `src/styles/tokens.css` (và `tokens.ts` nếu JS cần), đừng hard-code tại chỗ.
-- **Hai theme light và dark**, mặc định light ở lần vào đầu (không theo hệ điều hành). Quản lý bằng `next-themes` (`src/components/layout/ThemeProvider.tsx`), nút đổi là `ThemeToggle`.
+- **Hai theme light và dark**, mặc định light ở lần vào đầu (không theo hệ điều hành). Một inline script trong `<head>` (`src/components/layout/theme-script.ts`) đọc `localStorage["theme"]` và gắn class `dark` trước khi trang hiện, theo hướng dẫn "Preventing flash before hydration" của Next. Nút đổi là `ThemeToggle`, dùng `applyTheme()`. **Không cài lại `next-themes`**: nó gây cảnh báo "Encountered a script tag" với React 19.
 - Light ở `:root`, dark ở `.dark` trong `tokens.css`. Mọi token semantic phải có giá trị ở **cả hai** khối.
 - Chữ màu accent dùng `text-emphasis`, **không** dùng `text-primary`. `text-emphasis` **chỉ cho chữ lớn** (≥ 24px, hoặc ≥ 19px đậm) vì ở light nó chỉ đạt 3.2:1. Chữ nhỏ cần nhấn thì dùng `text-foreground` kèm gạch chân hoặc chấm màu. `bg-primary` chỉ dùng làm nền nút với `text-primary-foreground`.
 - Hero cũng theo theme: dùng `--hero-from/via/to` và `text-hero-foreground`. Shader lấy màu từ `themeColors[theme]` trong `tokens.ts`.
 - Không dùng `dark:` để tô màu. Nếu một màu khác nhau giữa hai theme thì đó là token. `dark:` chỉ dùng để ẩn/hiện (ví dụ icon mặt trời/mặt trăng).
-- Component client đọc theme bằng `useTheme()` phải tránh lệch hydration: đừng render text khác nhau theo theme ở lần render đầu.
+- Server không biết theme của người xem. Đừng render text hay thuộc tính khác nhau theo theme; dùng CSS (`dark:hidden`, token) để thể hiện khác biệt. Code client cần biết theme thì đọc `document.documentElement.classList.contains("dark")` trong effect hoặc event handler.
 - Kiểm tra mọi thay đổi giao diện ở cả hai theme.
 
 ### Chuyển động
