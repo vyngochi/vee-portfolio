@@ -109,6 +109,24 @@ docs/ROADMAP.md          Kế hoạch triển khai và tiến độ
 ### Ảnh
 - Theo `docs/IMAGES.md`: chữ thường, không dấu, nối bằng gạch ngang. Hiển thị bằng `next/image`.
 
+### Khi việc cần ảnh hoặc video: hỏi rồi làm tiếp bằng ảnh tạm
+Agent không tự tạo, tải hay lấy ảnh từ nơi khác để thay ảnh của chủ dự án.
+
+1. **Kiểm tra trước:** xem `public/images/` đã có file đúng tên theo `docs/IMAGES.md` chưa. Có rồi thì dùng luôn.
+2. **Thiếu thì hỏi ngay** trong câu trả lời, đúng mẫu sau (gom mọi ảnh thiếu của việc đó vào một lần hỏi):
+   > 📷 **Cần ảnh cho P4.8**
+   > - `public/images/projects/evcare/demo.mp4`: video 16:10, 5–10 giây, không tiếng, dưới 3 MB
+   > - Dùng ở: BrowserFrame trên trang chi tiết EVCare
+   > - Gợi ý: quay đoạn xoay mô hình 3D trạng thái xe
+3. **Làm tiếp bằng ảnh tạm:** placeholder đúng tỉ lệ, màu từ token (`bg-muted`, viền `border-border`), ghi rõ chữ "Placeholder" và tên file đang chờ. Không dùng ảnh stock hay ảnh AI làm placeholder. Code phải sẵn sàng để chỉ cần đặt file đúng tên là ảnh thật hiện ra.
+4. **Chưa tick xong:** trong `docs/ROADMAP.md`, việc đó để `[~]` kèm ghi chú "chờ ảnh", và thêm ảnh còn thiếu vào bảng "Chờ chủ dự án". Chỉ tick `[x]` khi ảnh thật đã vào.
+5. **Khi chủ dự án gửi ảnh:**
+   - Đổi tên và đặt đúng chỗ theo `docs/IMAGES.md`.
+   - Kiểm tra tỉ lệ và dung lượng; báo lại nếu lệch nhiều so với yêu cầu thay vì tự cắt mất nội dung quan trọng.
+   - **Xoá metadata EXIF** (nhất là toạ độ GPS) của ảnh chụp trước khi commit.
+   - Gỡ placeholder, tick việc trong roadmap, xoá dòng tương ứng khỏi bảng "Chờ chủ dự án".
+6. **Ngoại lệ, phải dừng và chờ:** khi thiết kế phụ thuộc vào chính nội dung ảnh (ví dụ bố cục About tuỳ ảnh chân dung dọc hay ngang, hoặc màu cần hợp với ảnh). Khi đó hỏi, nói rõ đang chờ gì, và chuyển sang việc khác trong roadmap không phụ thuộc ảnh đó.
+
 ## Hoàn thành một việc nghĩa là
 
 1. `npm run lint` và `npm run build` đều qua.

@@ -4,6 +4,8 @@ Kế hoạch triển khai và theo dõi tiến độ toàn dự án. **Đây là
 
 **Trạng thái:** `[x]` xong · `[~]` đang làm · `[ ]` chưa làm · ⏳ chờ chủ dự án · 🔒 bị chặn bởi việc khác
 
+**Ảnh:** việc cần ảnh mà chưa có thì làm tiếp bằng placeholder, để `[~]` kèm "chờ ảnh" cho tới khi ảnh thật vào (quy tắc đầy đủ trong `AGENTS.md`).
+
 **Quy ước:** mỗi việc có mã (ví dụ `P2.3`) để nhắc trong commit message (`feat(hero): shader gradient [P2.3]`). Mỗi giai đoạn chỉ được coi là xong khi đạt hết **Tiêu chí xong** của giai đoạn đó, cộng với "Hoàn thành một việc" trong `AGENTS.md`.
 
 ---
