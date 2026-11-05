@@ -1,0 +1,261 @@
+/*
+ * DESIGN TOKENS: nguồn sự thật duy nhất cho màu, chữ, bo góc, chuyển động.
+ * Ba tầng:
+ *   1. Primitive  (--ink-*, --amber-*...)        : bảng màu thô. KHÔNG dùng trực tiếp trong component.
+ *   2. Semantic   (--background, --primary...)   : ý nghĩa, theo quy ước shadcn. Light ở :root, dark ở .dark.
+ *   3. @theme     : nối semantic vào Tailwind → class bg-background, text-emphasis, font-serif...
+ * Theme mặc định là light. next-themes gắn class "dark" lên <html> khi người xem chọn dark.
+ * Giá trị dùng trong JS (shader, GSAP) nằm ở src/styles/tokens.ts. Sửa ở đây thì sửa cả bên đó.
+ */
+
+/* ---------- 1. Primitive ---------- */
+:root {
+  /* Ink: nền và chữ, xám ngả xanh */
+  --ink-0: #ffffff;
+  --ink-50: #f5f6fa;
+  --ink-100: #eef1f8;
+  --ink-150: #e6e9f2;
+  --ink-200: #dfe3ec;
+  --ink-300: #c9cfdf;
+  --ink-400: #8790a8;
+  --ink-500: #5b6480;
+  --ink-600: #333d55;
+  --ink-700: #222a3d;
+  --ink-800: #1a2032;
+  --ink-850: #121725;
+  --ink-900: #0b0e17;
+  --ink-950: #0e1220;
+
+  /* Amber: accent chính, dùng làm nền nút và chữ nhấn ở dark */
+  --amber-400: #ffbd3d;
+  --amber-500: #ffa800;
+  /* Orange: chữ nhấn ở light. Tươi nhưng vẫn đạt 3.2:1 trên nền sáng (chuẩn AA cho chữ lớn ≥ 24px) */
+  --orange-600: #e85d04;
+
+  /* Aqua: accent phụ. 400 cho nền tối, 800 cho nền sáng (tương phản 4.9:1) */
+  --aqua-400: #00ffe0;
+  --aqua-800: #00796b;
+
+  /* Blue: ánh sáng của hero */
+  --blue-100: #dce6fb;
+  --blue-300: #8fb4ff;
+  --blue-500: #1f6fff;
+  --blue-600: #1a5fe0;
+  --blue-800: #0a3d8f;
+  --blue-950: #06122e;
+
+  --red-500: #ff5c5c;
+  --red-600: #d93636;
+}
+
+/* ---------- 2a. Semantic: LIGHT (mặc định) ---------- */
+:root {
+  --background: var(--ink-50);
+  --foreground: var(--ink-950);
+
+  --card: var(--ink-0);
+  --card-foreground: var(--ink-950);
+  --popover: var(--ink-0);
+  --popover-foreground: var(--ink-950);
+
+  /* primary = màu NỀN của nút chính. Chữ màu accent dùng --emphasis */
+  --primary: var(--amber-500);
+  --primary-foreground: #111111;
+  --secondary: var(--ink-150);
+  --secondary-foreground: var(--ink-950);
+  --muted: var(--ink-150);
+  --muted-foreground: var(--ink-500);
+  /* shadcn dùng "accent" cho nền hover của menu/list, không phải màu thương hiệu */
+  --accent: var(--ink-150);
+  --accent-foreground: var(--ink-950);
+  --destructive: var(--red-600);
+
+  --border: var(--ink-200);
+  --input: var(--ink-200);
+  --ring: var(--amber-500);
+
+  /* Riêng của portfolio */
+  --emphasis: var(--orange-600);
+  --highlight: var(--aqua-800);
+  --glow: var(--blue-600);
+
+  /* Hero: sương xanh nhạt, chữ tối */
+  --hero-from: var(--blue-300);
+  --hero-via: var(--blue-100);
+  --hero-to: var(--ink-50);
+  --hero-foreground: var(--ink-950);
+
+  --grain-opacity: 0.35;
+  --grain-blend: soft-light;
+  --shadow-hero-value: 0 40px 80px -40px rgb(30 50 100 / 0.28);
+  --shadow-float-value: 0 24px 48px -20px rgb(30 50 100 / 0.3);
+
+  --chart-1: var(--amber-500);
+  --chart-2: var(--aqua-800);
+  --chart-3: var(--blue-600);
+  --chart-4: var(--blue-300);
+  --chart-5: var(--ink-400);
+
+  --sidebar: var(--ink-0);
+  --sidebar-foreground: var(--ink-950);
+  --sidebar-primary: var(--amber-500);
+  --sidebar-primary-foreground: #111111;
+  --sidebar-accent: var(--ink-150);
+  --sidebar-accent-foreground: var(--ink-950);
+  --sidebar-border: var(--ink-200);
+  --sidebar-ring: var(--amber-500);
+
+  /* Bo góc: --radius là gốc của shadcn (nút, input). Card và hero có giá trị riêng ở @theme */
+  --radius: 0.875rem;
+
+  /* Nhiễu hạt dùng cho utility .grain */
+  --grain-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+
+  color-scheme: light;
+}
+
+/* ---------- 2b. Semantic: DARK ---------- */
+.dark {
+  --background: var(--ink-900);
+  --foreground: var(--ink-100);
+
+  --card: var(--ink-850);
+  --card-foreground: var(--ink-100);
+  --popover: var(--ink-850);
+  --popover-foreground: var(--ink-100);
+
+  --primary: var(--amber-500);
+  --primary-foreground: #111111;
+  --secondary: var(--ink-800);
+  --secondary-foreground: var(--ink-100);
+  --muted: var(--ink-800);
+  --muted-foreground: var(--ink-400);
+  --accent: var(--ink-800);
+  --accent-foreground: var(--ink-100);
+  --destructive: var(--red-500);
+
+  --border: var(--ink-700);
+  --input: var(--ink-700);
+  --ring: var(--amber-500);
+
+  --emphasis: var(--amber-500);
+  --highlight: var(--aqua-400);
+  --glow: var(--blue-500);
+
+  /* Hero: xanh sâu phát sáng trên nền đen, chữ sáng */
+  --hero-from: var(--blue-800);
+  --hero-via: var(--blue-950);
+  --hero-to: #000000;
+  --hero-foreground: var(--ink-100);
+
+  --grain-opacity: 0.2;
+  --grain-blend: overlay;
+  --shadow-hero-value: 0 50px 100px -40px rgb(0 0 0 / 0.8);
+  --shadow-float-value: 0 30px 60px -20px rgb(0 0 0 / 0.7);
+
+  --chart-1: var(--amber-500);
+  --chart-2: var(--aqua-400);
+  --chart-3: var(--blue-500);
+  --chart-4: var(--blue-300);
+  --chart-5: var(--ink-400);
+
+  --sidebar: var(--ink-850);
+  --sidebar-foreground: var(--ink-100);
+  --sidebar-primary: var(--amber-500);
+  --sidebar-primary-foreground: #111111;
+  --sidebar-accent: var(--ink-800);
+  --sidebar-accent-foreground: var(--ink-100);
+  --sidebar-border: var(--ink-700);
+  --sidebar-ring: var(--amber-500);
+
+  color-scheme: dark;
+}
+
+/* ---------- 3. Nối vào Tailwind ---------- */
+@theme inline {
+  /* Màu */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-emphasis: var(--emphasis);
+  --color-highlight: var(--highlight);
+  --color-glow: var(--glow);
+  --color-hero-foreground: var(--hero-foreground);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Font: biến --font-* được next/font gắn ở src/app/layout.tsx */
+  --font-sans: var(--font-manrope), "Segoe UI", system-ui, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-mono: var(--font-jetbrains), Consolas, monospace;
+
+  /* Thang chữ: text-display, text-headline, text-title, text-eyebrow */
+  --text-display: clamp(3.5rem, 11.5vw, 10.5rem);
+  --text-display--line-height: 0.9;
+  --text-display--letter-spacing: -0.055em;
+  --text-display--font-weight: 600;
+  --text-headline: clamp(1.75rem, 3.6vw, 2.875rem);
+  --text-headline--line-height: 1.05;
+  --text-headline--letter-spacing: -0.035em;
+  --text-headline--font-weight: 600;
+  --text-title: clamp(1.5rem, 3.4vw, 2.75rem);
+  --text-title--line-height: 1.05;
+  --text-title--letter-spacing: -0.04em;
+  --text-title--font-weight: 600;
+  --text-eyebrow: 0.71875rem;
+  --text-eyebrow--line-height: 1.45;
+  --text-eyebrow--letter-spacing: 0.06em;
+
+  /* Bo góc */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-card: 1.375rem;
+  --radius-hero: 1.75rem;
+
+  /* Chuyển động: ease-out-expo cho chuyển cảnh, ease-spring cho tương tác (hover, nhấn) */
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --animate-rise: rise 1.1s var(--ease-out-expo) both;
+  --animate-scroll-cue: scroll-cue 2s var(--ease-out-expo) infinite;
+
+  /* Đổ bóng: giá trị đổi theo theme */
+  --shadow-hero: var(--shadow-hero-value);
+  --shadow-float: var(--shadow-float-value);
+
+  @keyframes rise {
+    from { transform: translateY(105%); }
+    to { transform: none; }
+  }
+  @keyframes scroll-cue {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(400%); }
+  }
+}
