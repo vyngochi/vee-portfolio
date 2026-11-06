@@ -10,7 +10,7 @@ export const profile: Profile = {
   tagline: {
     en: {
       lead: "Frontend developer building interfaces",
-      accent: "in motion",
+      accent: "with a cup of café",
       tail: ".",
     },
     vi: {
@@ -69,15 +69,10 @@ export const activities: Activity[] = [
     },
   },
   {
-    title: { en: "Tuoi Tre Start-up Award 2026", vi: "Tuổi Trẻ Start-up Award 2026" },
-    // date: CV không ghi tháng
-    description: {
-      en: "Took part with BeeWise, an EdTech startup project.",
-      vi: "Tham gia cùng BeeWise, một dự án khởi nghiệp EdTech.",
+    title: {
+      en: "Startup support scholarship",
+      vi: "Học bổng hỗ trợ khởi nghiệp",
     },
-  },
-  {
-    title: { en: "Startup support scholarship", vi: "Học bổng hỗ trợ khởi nghiệp" },
     organizer: "FPT University",
     // date: CV không ghi tháng
     description: {

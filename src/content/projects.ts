@@ -14,7 +14,10 @@ export const projects: Project[] = [
     kind: "product",
     start: "2026-06",
     end: null,
-    role: { en: "Frontend Developer (frontend owner)", vi: "Frontend Developer (phụ trách chính frontend)" },
+    role: {
+      en: "Frontend Developer (frontend owner)",
+      vi: "Frontend Developer (phụ trách chính frontend)",
+    },
     description: {
       en: "BeeWise helps learners find tutors through AI matching. Its SuperLMS portal gives tutors and students AI tools to manage schedules, generate assignments and learn with the Feynman method.",
       vi: "BeeWise giúp học viên tìm gia sư phù hợp bằng AI. Cổng SuperLMS cung cấp cho gia sư và học viên các công cụ AI để quản lý lịch, tạo bài tập và học theo phương pháp Feynman.",
@@ -27,10 +30,6 @@ export const projects: Project[] = [
       {
         en: "Shipped on Vercel with a custom domain and improved SEO with Google Search Console and Bing Webmaster Tools.",
         vi: "Deploy trên Vercel với tên miền riêng, cải thiện SEO bằng Google Search Console và Bing Webmaster Tools.",
-      },
-      {
-        en: "Took part in the Tuoi Tre Start-up Award 2026 and received a startup scholarship from FPT University.",
-        vi: "Tham gia Tuổi Trẻ Start-up Award 2026 và nhận học bổng khởi nghiệp của Đại học FPT.",
       },
     ],
     stack: ["Next.js", "React", "TypeScript", "Vercel"],
@@ -81,7 +80,10 @@ export const projects: Project[] = [
     kind: "internship",
     start: "2026-01",
     end: "2026-04",
-    role: { en: "Frontend Intern Developer at FPT Software", vi: "Thực tập sinh Frontend tại FPT Software" },
+    role: {
+      en: "Frontend Intern Developer at FPT Software",
+      vi: "Thực tập sinh Frontend tại FPT Software",
+    },
     description: {
       en: "An internal HR management system. During my internship I maintained the UI, fixed bugs and improved small features.",
       vi: "Hệ thống quản lý nhân sự nội bộ. Trong thời gian thực tập, mình bảo trì giao diện, sửa lỗi và cải thiện các tính năng nhỏ.",

@@ -39,10 +39,9 @@ export const vi: Dictionary = {
       graduation: "Dự kiến tốt nghiệp",
       languages: "Ngoại ngữ",
     },
-    now: { label: "Hiện tại", since: "Từ" },
   },
   sections: {
-    about: { lead: "Một chút", accent: "về mình" },
+    about: { lead: "Một chút", accent: "về Vỹ" },
     work: { lead: "Dự án", accent: "Vỹ đã tham gia" },
     experience: { lead: "Nơi Vỹ đã từng", accent: "làm việc" },
     contact: { lead: "Cùng làm gì đó", accent: "nhé?" },

@@ -2,7 +2,6 @@ import { FlowerLogo } from "@/components/brand/FlowerLogo";
 import { BentoCard } from "@/components/bento/BentoCard";
 import { TechMarquee } from "@/components/bento/TechMarquee";
 import { Section } from "@/components/layout/Section";
-import { experience } from "@/content/experience";
 import { activities, education, profile } from "@/content/profile";
 import { languages, skills } from "@/content/skills";
 import { t } from "@/i18n/config";
@@ -13,14 +12,13 @@ import { formatYearMonth } from "@/lib/format";
  * Section About: lưới bento, MỖI THẺ LÀ THÔNG TIN THẬT từ CV (xem "Mục đích" trong AGENTS.md). [P3]
  * Bố cục (md, 4 cột):
  *   About (2×2)          | Thành tích (2)
- *                        | Hiện tại | Học vấn
- *   Điểm mạnh (2)        | Công nghệ (2)
+ *                        | Học vấn (2)
+ *   Công nghệ (4, toàn chiều rộng)
  */
 export async function About() {
   const locale = await getLocale();
   const dict = await getDictionary();
   const b = dict.bento;
-  const current = experience.find((job) => job.end === null);
 
   return (
     <Section id="about" title={dict.sections.about}>
@@ -59,40 +57,33 @@ export async function About() {
           </ul>
         </BentoCard>
 
-        {current ? (
-          <BentoCard label={b.now.label}>
-            <h3 className="text-xl font-semibold tracking-tight">{current.company}</h3>
-            <p className="text-muted-foreground">{t(current.role, locale)}</p>
-            <p className="mt-auto inline-flex items-center gap-2 font-mono text-sm">
-              <span className="size-2 rounded-full bg-highlight" aria-hidden />
-              {b.now.since} {formatYearMonth(current.start, locale)}
-            </p>
-          </BentoCard>
-        ) : null}
-
-        <BentoCard label={b.education.label}>
-          <h3 className="text-xl font-semibold tracking-tight">{education.school}</h3>
-          <p className="text-muted-foreground">{t(education.degree, locale)}</p>
-          <dl className="mt-auto grid grid-cols-2 gap-3">
+        <BentoCard label={b.education.label} className="sm:col-span-2">
+          <div className="flex flex-col gap-1">
+            <h3 className="text-xl font-semibold tracking-tight">{education.school}</h3>
+            <p className="text-muted-foreground">{t(education.degree, locale)}</p>
+          </div>
+          <dl className="mt-auto grid gap-x-8 gap-y-4 border-t border-border pt-4 sm:grid-cols-[auto_auto_minmax(0,1fr)]">
             {education.gpa ? (
-              <div>
+              <div className="flex flex-col gap-1">
                 <dt className="text-eyebrow uppercase text-muted-foreground">{b.education.gpa}</dt>
                 <dd className="font-mono text-2xl font-medium tabular-nums">{t(education.gpa, locale).split(" ")[0]}</dd>
               </div>
             ) : null}
             {education.expectedGraduation ? (
-              <div>
+              <div className="flex flex-col gap-1">
                 <dt className="text-eyebrow uppercase text-muted-foreground">{b.education.graduation}</dt>
                 <dd className="font-mono text-2xl font-medium tabular-nums">{education.expectedGraduation}</dd>
               </div>
             ) : null}
+            <div className="flex flex-col gap-1">
+              <dt className="text-eyebrow uppercase text-muted-foreground">{b.education.languages}</dt>
+              <dd className="text-sm">
+                {languages.map((l) => (
+                  <span key={l.en} className="block">{t(l, locale)}</span>
+                ))}
+              </dd>
+            </div>
           </dl>
-          <div className="flex flex-col gap-1 border-t border-border pt-3">
-            <p className="text-eyebrow uppercase text-muted-foreground">{b.education.languages}</p>
-            {languages.map((l) => (
-              <p key={l.en} className="text-sm">{t(l, locale)}</p>
-            ))}
-          </div>
         </BentoCard>
 
         <BentoCard label={b.stack.label} className="min-h-0 sm:col-span-2 md:col-span-4">

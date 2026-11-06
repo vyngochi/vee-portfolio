@@ -41,7 +41,6 @@ export const en = {
       graduation: "Expected graduation",
       languages: "Languages",
     },
-    now: { label: "Currently", since: "Since" },
   },
   sections: {
     about: { lead: "A little", accent: "about me" },
