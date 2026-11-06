@@ -12,7 +12,7 @@ type Item = { name: string; group: string };
  */
 export function TechMarquee({ items }: { items: Item[] }) {
   return (
-    <div data-logo-track className="group/marquee -mx-6 overflow-hidden [mask-image:linear-gradient(to_right,transparent,#000_8%,#000_92%,transparent)] motion-reduce:mx-0 motion-reduce:[mask-image:none]">
+    <div className="group/marquee -mx-6 overflow-hidden [mask-image:linear-gradient(to_right,transparent,#000_8%,#000_92%,transparent)] motion-reduce:mx-0 motion-reduce:[mask-image:none]">
       <div className="flex w-max motion-safe:animate-marquee motion-safe:hover:[animation-play-state:paused] motion-reduce:w-full motion-reduce:flex-wrap">
         {[0, 1].map((copy) => (
           <ul

@@ -58,7 +58,8 @@ src/lib/format.ts        Định dạng ngày theo ngôn ngữ
 src/lib/tech-icons.ts    Logo công nghệ (Simple Icons, CC0), khoá = tên trong skills.ts. Thêm công nghệ thì thêm logo ở đây
 src/components/layout/   Nav, MobileMenu, Footer, Container, Section, ThemeToggle, LanguageSwitcher, theme-script
 src/lib/sections.ts      Thứ tự và id các section trang chủ (homeSections), MAIN_ID, TOP_ID
-src/components/brand/    Logo hoa (FlowerLogo, vector) và LogoStage (GSAP: hoa bay từ hero xuống About; điểm neo là data-logo-anchor, chữ là data-logo-word)
+src/components/brand/    Logo hoa (FlowerLogo, vector) và LogoStage (GSAP: hoa bay từ hero xuống About; điểm neo là data-logo-anchor (hero, about, project), chữ là data-logo-word)
+src/components/projects/ BrowserFrame (khung trình duyệt: video / ảnh / iframe), dùng trong khối dự án ở Projects.tsx; media chọn bởi src/lib/project-media.ts
 src/components/sections/ Mỗi section của trang chủ một file: Hero, About, Projects, DesignSystem, Contact
 src/components/bento/    Widget trong lưới bento
 src/components/ui/       shadcn (được sửa thoải mái, code thuộc dự án)

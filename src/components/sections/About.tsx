@@ -96,6 +96,12 @@ export async function About() {
         </BentoCard>
 
         <BentoCard label={b.stack.label} className="min-h-0 sm:col-span-2 md:col-span-4">
+          {/* Tâm đúng góc trên phải của khung thẻ (hoa ghim ở góc, nhô ra một nửa): nơi bông hoa bay tới đậu (chỉ hiện khi hiệu ứng bay đang bật, md+) */}
+          <div
+            data-logo-anchor="tech"
+            aria-hidden
+            className="absolute -top-6 -right-6 hidden size-12 group-data-[logo-flight=on]/stage:block"
+          />
           <TechMarquee
             items={skills.flatMap((group) =>
               group.items.map((name) => ({ name, group: t(group.label, locale) })),

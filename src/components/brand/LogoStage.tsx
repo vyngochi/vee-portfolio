@@ -46,10 +46,11 @@ export function LogoStage({
             '[data-logo-anchor="about"]',
           );
           const word = stage.querySelector<HTMLElement>("[data-logo-word]");
-          const track = stage.querySelector<HTMLElement>("[data-logo-track]");
+          const techAnchor = stage.querySelector<HTMLElement>('[data-logo-anchor="tech"]');
           if (!heroAnchor || !aboutAnchor || !word) return;
 
           stage.dataset.logoFlight = "on";
+          const cleanups: (() => void)[] = [];
 
           // Vị trí/kích thước của phần tử so với stage, không phụ thuộc vị trí cuộn
           const place = (el: HTMLElement) => {
@@ -62,12 +63,18 @@ export function LogoStage({
               h: r.height,
             };
           };
+          const projectAnchors = Array.from(
+            stage.querySelectorAll<HTMLElement>('[data-logo-anchor="project"]'),
+          );
           const geo = () => ({
             hero: place(heroAnchor),
             about: place(aboutAnchor),
+            aboutSection: place(aboutAnchor.closest("section") ?? aboutAnchor),
             word: place(word),
-            // Khung của thẻ công nghệ; hoa lướt ở khoảng trống ngay dưới thẻ
-            track: track ? place(track.closest("article") ?? track) : null,
+            // Góc trên phải thẻ Công nghệ: hoa đậu ở đó
+            tech: techAnchor ? place(techAnchor) : null,
+            // Ô trống cạnh tiêu đề từng dự án: nơi hoa đậu lại
+            projects: projectAnchors.map(place),
           });
           let g = geo();
           gsap.set(flyer, { width: g.hero.w, height: g.hero.h });
@@ -102,19 +109,24 @@ export function LogoStage({
             },
           );
 
-          // --- Cuộn tiếp: About -> đầu dải công nghệ -> lăn sang phải ------------------------------
-          if (track) {
+          // --- Cuộn tiếp: About -> góc trên phải thẻ Công nghệ (theo tiến độ cuộn, xoay thêm một vòng) ---
+          if (techAnchor) {
             const vh = () => window.innerHeight;
             const s1 = () =>
               Math.max(1, g.about.y + g.about.h / 2 - vh() * 0.55);
-            const trackMid = () => (g.track ? g.track.y + g.track.h + 80 : 0);
-            const s2 = () => Math.max(s1() + 1, trackMid() - vh() * 0.7);
-            const small = () => Math.min(1, 72 / g.hero.w);
-            const trackY = () => trackMid() - g.hero.h / 2;
-            const trackStartX = () =>
-              (g.track ? g.track.x : 0) + 48 - g.hero.w / 2;
-            const trackEndX = () =>
-              (g.track ? g.track.x + g.track.w : 0) - 48 - g.hero.w / 2;
+            // Hoa nằm yên trong About tới khoảng 2/3 section (giữa khung nhìn chạm 2/3) rồi mới bay tiếp
+            const leave = () =>
+              g.aboutSection.y + g.aboutSection.h * (2 / 3) - vh() * 0.5;
+            const techSlot = () => ({
+              x: (g.tech?.x ?? 0) + ((g.tech?.w ?? 0) - g.hero.w) / 2,
+              y: (g.tech?.y ?? 0) + ((g.tech?.h ?? 0) - g.hero.h) / 2,
+              scale: (g.tech?.w ?? g.hero.w) / g.hero.w,
+            });
+            const s2 = () =>
+              Math.max(
+                s1() + 201,
+                (g.tech ? g.tech.y + g.tech.h / 2 : 0) - vh() * 0.6,
+              );
 
             gsap.fromTo(
               flyer,
@@ -125,15 +137,15 @@ export function LogoStage({
                 rotation: 360,
               },
               {
-                x: trackStartX,
-                y: trackY,
-                scale: small,
-                rotation: 360,
+                x: () => techSlot().x,
+                y: () => techSlot().y,
+                scale: () => techSlot().scale,
+                rotation: 720,
                 ease: "none",
                 immediateRender: false,
                 scrollTrigger: {
                   trigger: stage,
-                  start: s1,
+                  start: () => Math.min(Math.max(leave(), s1() + 1), s2() - 200),
                   end: s2,
                   scrub: 0.6,
                   invalidateOnRefresh: true,
@@ -141,28 +153,78 @@ export function LogoStage({
               },
             );
 
-            // Hoa chạm điểm đầu của vùng lướt thì tự lướt mượt sang phải (không theo tiến độ cuộn) và dừng ở cuối dải.
-            // Cuộn ngược lên khỏi vùng đó thì đưa hoa về đầu dải để tween cuộn ở trên tiếp quản.
-            let glide: gsap.core.Tween | undefined;
-            ScrollTrigger.create({
-              trigger: stage,
-              start: s2,
-              invalidateOnRefresh: true,
-              onEnter: () => {
-                glide?.kill();
-                glide = gsap.to(flyer, {
-                  x: trackEndX(),
-                  rotation: 1080,
-                  duration: 1.8,
-                  delay: 0.7, // chờ tween cuộn (scrub) ở trên về đúng đầu dải
-                  ease: "power2.inOut",
-                });
-              },
-              onLeaveBack: () => {
-                glide?.kill();
-                gsap.set(flyer, { x: trackStartX(), rotation: 360 });
-              },
+            // --- Mỗi dự án: khi cuộn tới đầu dự án, hoa từ vị trí trước đó (góc thẻ Công nghệ / dự án trước) bay nhẹ xuống ---
+            // Tự chạy, KHÔNG theo tiến độ cuộn. x và y dùng easing khác nhau nên đường bay là đường cong.
+            // Mỗi dự án một góc xoay màu (hue-rotate). Cả hai dự án hoa xoay vòng chậm (spin) khi đang ở khu vực dự án.
+            const hues = [35, 150];
+            const slot = (j: number) => ({
+              x: g.projects[j].x + (g.projects[j].w - g.hero.w) / 2,
+              y: g.projects[j].y + (g.projects[j].h - g.hero.h) / 2,
+              scale: g.projects[j].w / g.hero.w,
             });
+
+            // Mỗi cú bay là một timeline tạm dừng, dựng sẵn từ dự án trước tới dự án này (giá trị đầu/cuối rõ ràng).
+            // Cuộn xuống thì play(), cuộn ngược thì reverse(): hoa bay NGƯỢC lại đúng đường cong, xoay và đổi màu ngược.
+            projectAnchors.forEach((anchor, k) => {
+              const article = anchor.closest("article");
+              if (!article) return;
+              const rot0 = 720 + 360 * k;
+              const hop = gsap.timeline({
+                paused: true,
+                defaults: { duration: 1.6, immediateRender: false },
+              });
+              hop.fromTo(
+                flyer,
+                { x: k === 0 ? () => techSlot().x : () => slot(k - 1).x },
+                { x: () => slot(k).x, ease: "power2.inOut" },
+                0,
+              );
+              hop.fromTo(
+                flyer,
+                {
+                  y: k === 0 ? () => techSlot().y : () => slot(k - 1).y,
+                  scale: k === 0 ? () => techSlot().scale : () => slot(k - 1).scale,
+                },
+                { y: () => slot(k).y, scale: () => slot(k).scale, ease: "power1.inOut" },
+                0,
+              );
+              hop.fromTo(
+                flyer,
+                { rotation: rot0, filter: `hue-rotate(${k === 0 ? 0 : hues[k - 1]}deg)` },
+                { rotation: rot0 + 360, filter: `hue-rotate(${hues[k]}deg)`, ease: "power2.inOut" },
+                0,
+              );
+              // Kích thước/vị trí ô đổi khi resize: tính lại giá trị đầu/cuối rồi giữ nguyên tiến độ
+              const onRefresh = () => hop.invalidate();
+              ScrollTrigger.addEventListener("refresh", onRefresh);
+              ScrollTrigger.create({
+                trigger: article,
+                start: "top 70%",
+                onEnter: () => hop.play(),
+                onLeaveBack: () => hop.reverse(),
+              });
+              // Dọn khi matchMedia hoàn tác
+              cleanups.push(() => ScrollTrigger.removeEventListener("refresh", onRefresh));
+            });
+
+            // Xoay vòng chậm từ khi hoa đậu ở thẻ Công nghệ tới hết khu vực dự án (xoay phần tử con nên không đụng tới tween bay)
+            if (projectAnchors.length > 0) {
+              const spin = gsap.to(intro, {
+                rotation: "+=360",
+                duration: 16,
+                ease: "none",
+                repeat: -1,
+                paused: true,
+              });
+              const articles = projectAnchors.map((a) => a.closest("article") ?? a);
+              ScrollTrigger.create({
+                trigger: techAnchor.closest("article") ?? articles[0],
+                start: "top 90%",
+                endTrigger: articles[articles.length - 1],
+                end: "bottom top",
+                onToggle: (self) => (self.isActive ? spin.play() : spin.pause()),
+              });
+            }
           }
 
           // --- Mở đầu: hoa chạy từ mép phải chữ sang trái, chữ lộ dần theo sau -------------------
@@ -207,6 +269,7 @@ export function LogoStage({
           window.addEventListener("scroll", skipIntro, { passive: true });
 
           return () => {
+            cleanups.forEach((fn) => fn());
             window.removeEventListener("scroll", skipIntro);
             delete stage.dataset.logoFlight;
             word.style.clipPath = "";

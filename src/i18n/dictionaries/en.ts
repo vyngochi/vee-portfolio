@@ -6,7 +6,8 @@
 export const en = {
   meta: {
     title: "Ngo Chi Vy · Frontend Developer",
-    description: "Frontend developer working with React, Next.js and Three.js. Selected projects, experience and contact.",
+    description:
+      "Frontend developer working with React, Next.js and Three.js. Selected projects, experience and contact.",
   },
   nav: {
     label: "Main navigation",
@@ -34,15 +35,39 @@ export const en = {
     about: { label: "About" },
     achievements: { label: "Achievements" },
     stack: { label: "Tech stack" },
-    education: { label: "Education", gpa: "GPA", graduation: "Expected graduation", languages: "Languages" },
+    education: {
+      label: "Education",
+      gpa: "GPA",
+      graduation: "Expected graduation",
+      languages: "Languages",
+    },
     now: { label: "Currently", since: "Since" },
   },
   sections: {
     about: { lead: "A little", accent: "about me" },
-    work: { lead: "Selected", accent: "work" },
+    work: { lead: "My", accent: "projects" },
     experience: { lead: "Where I've", accent: "worked" },
     contact: { lead: "Let's build something", accent: "together" },
     placeholder: "Coming soon",
+  },
+  projects: {
+    kind: {
+      product: "Product",
+      academic: "Academic project",
+      internship: "Internship",
+      personal: "Personal project",
+    },
+    role: "Role",
+    period: "Period",
+    team: "Team",
+    highlights: "Highlights",
+    browserLabel: "Project preview",
+    placeholder: "Placeholder",
+    waitingFor: "Waiting for",
+    loadLive: "Load live preview",
+    openLive: "Open in a new tab",
+    closeLive: "Back to preview",
+    previewAlt: "Preview of {title}",
   },
   footer: {
     getInTouch: "Get in touch",
@@ -69,5 +94,7 @@ export const en = {
   },
 } as const;
 
-type DeepString<T> = { [K in keyof T]: T[K] extends string ? string : DeepString<T[K]> };
+type DeepString<T> = {
+  [K in keyof T]: T[K] extends string ? string : DeepString<T[K]>;
+};
 export type Dictionary = DeepString<typeof en>;

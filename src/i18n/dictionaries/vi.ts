@@ -4,7 +4,8 @@ import type { Dictionary } from "./en";
 export const vi: Dictionary = {
   meta: {
     title: "Ngô Chí Vỹ · Frontend Developer",
-    description: "Lập trình viên frontend làm việc với React, Next.js và Three.js. Dự án tiêu biểu, kinh nghiệm và liên hệ.",
+    description:
+      "Lập trình viên frontend làm việc với React, Next.js và Three.js. Dự án tiêu biểu, kinh nghiệm và liên hệ.",
   },
   nav: {
     label: "Điều hướng chính",
@@ -32,15 +33,39 @@ export const vi: Dictionary = {
     about: { label: "Giới thiệu" },
     achievements: { label: "Thành tích" },
     stack: { label: "Công nghệ" },
-    education: { label: "Học vấn", gpa: "GPA", graduation: "Dự kiến tốt nghiệp", languages: "Ngoại ngữ" },
+    education: {
+      label: "Học vấn",
+      gpa: "GPA",
+      graduation: "Dự kiến tốt nghiệp",
+      languages: "Ngoại ngữ",
+    },
     now: { label: "Hiện tại", since: "Từ" },
   },
   sections: {
     about: { lead: "Một chút", accent: "về mình" },
-    work: { lead: "Dự án", accent: "chọn lọc" },
+    work: { lead: "Dự án", accent: "Vỹ đã tham gia" },
     experience: { lead: "Hành trình", accent: "làm việc" },
     contact: { lead: "Cùng làm gì đó", accent: "nhé?" },
     placeholder: "Sắp ra mắt",
+  },
+  projects: {
+    kind: {
+      product: "Sản phẩm",
+      academic: "Dự án học thuật",
+      internship: "Thực tập",
+      personal: "Dự án cá nhân",
+    },
+    role: "Vai trò",
+    period: "Thời gian",
+    team: "Nhóm",
+    highlights: "Điểm nổi bật",
+    browserLabel: "Xem trước dự án",
+    placeholder: "Ảnh tạm",
+    waitingFor: "Đang chờ",
+    loadLive: "Nạp bản xem trực tiếp",
+    openLive: "Mở trong tab mới",
+    closeLive: "Quay lại bản xem trước",
+    previewAlt: "Xem trước {title}",
   },
   footer: {
     getInTouch: "Liên hệ",
