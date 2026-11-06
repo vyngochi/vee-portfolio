@@ -47,14 +47,6 @@ export const heroShaderPalette = {
   dark: { c0: "#000000", c1: "#061e57", c2: "#1a7af2", c3: "#6b94d1", grain: 0.09 },
 } as const satisfies Record<ThemeName, { c0: string; c1: string; c2: string; c3: string; grain: number }>;
 
-/** Bộ màu accent cho người xem tự đổi (widget design token trong bento). */
-export const accentPresets = [
-  { name: "Cam", value: "#ffa800" },
-  { name: "Ngọc", value: "#00ffe0" },
-  { name: "Hồng", value: "#ff5c7a" },
-  { name: "Tím", value: "#b69cff" },
-] as const;
-
 /** Easing dạng mảng cubic-bezier, dùng trực tiếp với Framer Motion: transition={{ ease: ease.outExpo }} */
 export const ease = {
   outExpo: [0.22, 1, 0.36, 1],

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { profile } from "@/content/profile";
-import { localizedPath } from "@/i18n/config";
+import { localizedPath, t } from "@/i18n/config";
 import { getDictionary, getLocale } from "@/i18n/server";
 import { homeSections } from "@/lib/sections";
 import { Container } from "./Container";
@@ -14,14 +14,15 @@ export async function Nav() {
   const locale = await getLocale();
   const dict = await getDictionary();
   const home = localizedPath(locale, "/");
+  const name = t(profile.name, locale);
 
   const links = homeSections.map((id) => ({ href: `${home}#${id}`, label: dict.nav[id] }));
 
   return (
     <NavShell>
       <Container className="flex h-16 items-center justify-between gap-4 sm:h-[72px]">
-        <Link href={home} className="text-lg font-bold tracking-tight" aria-label={`${profile.name}, ${dict.nav.home}`}>
-          {profile.name}
+        <Link href={home} className="text-lg font-bold tracking-tight" aria-label={`${name}, ${dict.nav.home}`}>
+          {name}
           <span className="text-emphasis">.</span>
         </Link>
 

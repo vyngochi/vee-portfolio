@@ -40,6 +40,34 @@
   );
 }
 
+/*
+ * Spotlight: quầng sáng màu primary đi theo chuột trên thẻ. --mx, --my do SpotlightCard đặt.
+ * Thẻ cần class "isolate" để lớp sáng (z-index -1) nằm trên nền thẻ nhưng dưới nội dung.
+ * Chỉ bật trên thiết bị có hover thật. [P3.8]
+ */
+@utility spotlight {
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s var(--ease-out-expo);
+    background: radial-gradient(
+      280px circle at var(--mx, 50%) var(--my, 50%),
+      color-mix(in srgb, var(--primary) 16%, transparent),
+      transparent 70%
+    );
+  }
+  @media (hover: hover) {
+    &:hover::before {
+      opacity: 1;
+    }
+  }
+}
+
 /* Bóng đổ mềm cho ảnh chân dung tách nền, đổi theo theme */
 @utility portrait-shadow {
   filter: var(--portrait-shadow);

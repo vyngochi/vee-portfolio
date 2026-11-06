@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ArrowDown } from "lucide-react";
+import { FlowerLogo } from "@/components/brand/FlowerLogo";
 import { Container } from "@/components/layout/Container";
 import { HeroShader } from "@/components/three/HeroShader";
 import { profile } from "@/content/profile";
@@ -10,7 +11,7 @@ import { HeroFrame } from "./HeroFrame";
 /**
  * Hero. Thứ tự lớp (sau → trước), mỗi lớp lệch theo chuột với độ sâu khác nhau:
  *   1. Nền: gradient CSS theo token (fallback) + shader WebGL
- *   2. Chữ trang trí cực lớn (profile.heroWord), nét mảnh, nằm SAU ảnh chân dung
+ *   2. Chữ PORTFOLIO (profile.heroWord) cực lớn, nét mảnh, nằm SAU ảnh chân dung
  *   3. Ảnh chân dung tách nền, đứng sát đáy, cột phải
  *   4. Tên + tagline ở cột trái (KHÔNG bao giờ bị ảnh che), thông tin nhỏ, scroll cue
  * Khung là @container: cỡ tên (text-hero, đơn vị cqi) và độ rộng cột tính theo bề rộng khung,
@@ -20,6 +21,7 @@ export async function Hero() {
   const locale = await getLocale();
   const dict = await getDictionary();
   const tagline = t(profile.tagline, locale);
+  const name = t(profile.name, locale);
   const aboutHref = `${localizedPath(locale, "/")}#about`;
 
   return (
@@ -34,9 +36,10 @@ export async function Hero() {
         {/* 1. Shader */}
         <HeroShader className="absolute inset-0 -z-10 size-full" />
 
-        {/* 2. Chữ trang trí sau ảnh */}
+        {/* 2. Chữ PORTFOLIO sau ảnh; LogoStage làm chữ lộ dần theo bông hoa */}
         <p
           aria-hidden
+          data-logo-word
           className="parallax-layer pointer-events-none absolute top-[9%] right-[3%] z-0 hidden font-poster text-[19cqi] leading-none tracking-[0.01em] text-transparent uppercase opacity-30 select-none [-webkit-text-stroke:2px_var(--hero-foreground)] md:block"
           style={{ "--depth": 8 } as React.CSSProperties}
         >
@@ -65,13 +68,20 @@ export async function Hero() {
           className="parallax-layer relative z-30 flex flex-col gap-5 px-5 sm:px-8 md:mt-auto md:max-w-[58cqi] md:px-10 md:pb-24"
           style={{ "--depth": 10 } as React.CSSProperties}
         >
+          {/* Điểm neo của bông hoa (md+). Logo tĩnh ẩn khi hoa đang bay hoặc khi giảm chuyển động */}
+          <div
+            data-logo-anchor="hero"
+            className="hidden aspect-[148.1/153.7] w-[9cqi] md:block motion-reduce:hidden group-data-[logo-flight=on]/stage:invisible"
+          >
+            <FlowerLogo idPrefix="hero" className="size-full" />
+          </div>
           <h1 className="text-hero md:whitespace-nowrap">
             {/*
               overflow-hidden làm mask cho animation trượt lên. Với line-height 0.9, đuôi chữ g/y của Manrope
               thò khoảng 0.2em xuống dưới dòng, nên pb chừa 0.3em (và -mb trả lại khoảng cách) để không bị cắt.
             */}
             <span className="-mb-[0.3em] block overflow-hidden pb-[0.3em]">
-              <span className="block animate-rise">{profile.name}</span>
+              <span className="block animate-rise">{name}</span>
             </span>
           </h1>
           <p className="max-w-[28ch] text-xl leading-snug font-medium text-balance motion-safe:animate-in motion-safe:fade-in motion-safe:fill-mode-both motion-safe:delay-300 motion-safe:duration-700 sm:text-2xl">
@@ -90,7 +100,7 @@ export async function Hero() {
         >
           <Image
             src="/images/profile/portrait-cutout.webp"
-            alt={dict.hero.portraitAlt.replace("{name}", profile.name)}
+            alt={dict.hero.portraitAlt.replace("{name}", name)}
             fill
             preload
             // Bộ tối ưu ảnh của Next trả về JPEG cho file này, làm mất nền trong suốt.

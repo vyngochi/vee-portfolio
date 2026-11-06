@@ -30,7 +30,7 @@ export const projects: Project[] = [
       },
       {
         en: "Took part in the Tuoi Tre Start-up Award 2026 and received a startup scholarship from FPT University.",
-        vi: "Tham gia Tuoi Tre Start-up Award 2026 và nhận học bổng khởi nghiệp của Đại học FPT.",
+        vi: "Tham gia Tuổi Trẻ Start-up Award 2026 và nhận học bổng khởi nghiệp của Đại học FPT.",
       },
     ],
     stack: ["Next.js", "React", "TypeScript", "Vercel"],

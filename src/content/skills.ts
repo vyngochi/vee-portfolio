@@ -14,14 +14,8 @@ export const skills: SkillGroup[] = [
   },
   {
     label: { en: "Tools & Delivery", vi: "Công cụ & triển khai" },
-    items: ["Git", "GitLab", "Jira", "Vercel", "Google Search Console"],
+    items: ["Git", "GitLab", "ClickUp", "Vercel"],
   },
-];
-
-export const softSkills: Localized[] = [
-  { en: "Self-learning and quick to adapt to new technology", vi: "Tự học và thích nghi nhanh với công nghệ mới" },
-  { en: "Teamwork", vi: "Làm việc nhóm" },
-  { en: "Time management", vi: "Quản lý thời gian" },
 ];
 
 export const languages: Localized[] = [

@@ -12,6 +12,16 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 Portfolio cá nhân của một Frontend Engineer (animation, 3D, design system). Style: hero là khung bo góc với gradient xanh nhiễu hạt chạy bằng shader, headline cỡ lớn có một cụm chữ nghiêng serif màu accent, phía dưới là lưới bento các widget tương tác. Bản mẫu tham khảo: `demo/style-demo.html` (HTML tĩnh, không phải code của app).
 
+## Mục đích: portfolio để XIN VIỆC
+
+Đây là portfolio để ứng tuyển vị trí frontend. **Mọi thành phần phải cho nhà tuyển dụng một thông tin thật về chủ dự án**: đã làm gì, ở đâu, kết quả, thành tích, kỹ năng có bằng chứng trong CV hoặc dự án.
+
+- Trước khi thêm bất kỳ thứ gì, hỏi: "nhà tuyển dụng lướt 30 giây thì học được gì từ cái này?". Không trả lời được thì không thêm.
+- **Không** thêm widget đồ chơi hay tự nói về chính trang web (đổi màu accent, minh hoạ easing, nút nam châm, "mỗi ô là một component sống"...).
+- **Không** lặp lại cùng một thông tin ở nhiều chỗ.
+- **Không** khẳng định kỹ năng mà CV / dự án không chứng minh.
+- Hiệu ứng (shader, parallax, chuyển cảnh) chỉ là lớp nền làm trang có chất lượng, không bao giờ là nội dung.
+
 ## Tiến độ
 
 `docs/ROADMAP.md` là nguồn sự thật về tiến độ. **Trước khi bắt đầu** đọc roadmap để biết việc tiếp theo và việc đang chờ chủ dự án. **Khi xong một việc**, tick nó trong roadmap ở cùng commit, ghi mã việc vào commit message (ví dụ `feat(nav): mobile menu [P1.3]`). Quyết định kiến trúc mới thì thêm một dòng vào "Nhật ký quyết định".
@@ -45,8 +55,10 @@ src/i18n/config.ts       locales, Localized, t(), localizedPath() (dùng đượ
 src/i18n/server.ts       getLocale(), getDictionary() cho Server Component
 src/i18n/dictionaries/   Chữ giao diện: en.ts (gốc) và vi.ts
 src/lib/format.ts        Định dạng ngày theo ngôn ngữ
+src/lib/tech-icons.ts    Logo công nghệ (Simple Icons, CC0), khoá = tên trong skills.ts. Thêm công nghệ thì thêm logo ở đây
 src/components/layout/   Nav, MobileMenu, Footer, Container, Section, ThemeToggle, LanguageSwitcher, theme-script
 src/lib/sections.ts      Thứ tự và id các section trang chủ (homeSections), MAIN_ID, TOP_ID
+src/components/brand/    Logo hoa (FlowerLogo, vector) và LogoStage (GSAP: hoa bay từ hero xuống About; điểm neo là data-logo-anchor, chữ là data-logo-word)
 src/components/sections/ Mỗi section của trang chủ một file: Hero, About, Projects, DesignSystem, Contact
 src/components/bento/    Widget trong lưới bento
 src/components/ui/       shadcn (được sửa thoải mái, code thuộc dự án)
@@ -99,6 +111,10 @@ docs/ROADMAP.md          Kế hoạch triển khai và tiến độ
 - Ảnh PNG/WebP có nền trong suốt dùng `next/image` với `unoptimized` (bộ tối ưu của Next đang trả JPEG làm mất nền). Bù lại, tự cắt sát và nén file trước khi đưa vào `public/`.
 - Ảnh là phần tử lớn nhất trong khung hình đầu (LCP) thì dùng `preload` (Next 16 bỏ `priority`).
 
+### Lint của React Compiler
+- `react-hooks/immutability` không cho sửa `document` / biến ngoài component ngay trong thân component. Đặt thao tác DOM vào một hàm ở cấp module (ví dụ `applyTheme`, `applyAccent`) rồi gọi từ event handler.
+- Đọc trạng thái DOM (class, data-*) trong component bằng `useSyncExternalStore` thay vì `useEffect` + `setState`.
+
 ### Server / Client component
 - Mặc định là Server Component. Chỉ thêm `"use client"` ở component lá cần state, effect, sự kiện chuột hay WebGL.
 - Three.js / R3F / GSAP chỉ chạy trong Client Component. Canvas nặng thì nạp bằng `next/dynamic` với `ssr: false`.
@@ -120,7 +136,7 @@ docs/ROADMAP.md          Kế hoạch triển khai và tiến độ
 - Nội dung chưa có thì ghi rõ là dữ liệu mẫu, đừng bịa thành tích như thật.
 
 ### Font
-- Mọi font phải có subset `vietnamese` (kiểm tra trước khi thêm). Font hiện tại: Manrope (sans), Playfair Display italic (serif nhấn), Anton (`font-poster`, chữ trang trí cực lớn), JetBrains Mono (mono), nạp bằng `next/font/google` trong `src/app/[lang]/layout.tsx`.
+- Mọi font phải có subset `vietnamese` (kiểm tra trước khi thêm). Font hiện tại: Manrope (sans), Playfair Display italic (serif nhấn), Anton (`font-poster`, chữ PORTFOLIO cực lớn ở hero), JetBrains Mono (mono), nạp bằng `next/font/google` trong `src/app/[lang]/layout.tsx`.
 - Chữ chỉ vẽ viền (`-webkit-text-stroke`) phải dùng **font tĩnh** (như Anton). Font biến thể (Manrope...) có nét chồng nhau, vẽ viền sẽ lộ đường thừa bên trong chữ.
 
 ### Sự cố dev server trên Windows

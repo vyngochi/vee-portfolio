@@ -1,11 +1,13 @@
 import { ArrowUp, ArrowUpRight } from "lucide-react";
 import { profile } from "@/content/profile";
-import { getDictionary } from "@/i18n/server";
+import { t } from "@/i18n/config";
+import { getDictionary, getLocale } from "@/i18n/server";
 import { TOP_ID } from "@/lib/sections";
 import { Container } from "./Container";
 import { CurrentYear } from "./CurrentYear";
 
 export async function Footer() {
+  const locale = await getLocale();
   const dict = await getDictionary();
 
   return (
@@ -62,7 +64,7 @@ export async function Footer() {
 
       <Container className="flex flex-wrap justify-between gap-x-6 gap-y-2 border-t border-border py-6 text-xs text-muted-foreground">
         <p>
-          © <CurrentYear /> {profile.name}. {dict.footer.rights}
+          © <CurrentYear /> {t(profile.name, locale)}. {dict.footer.rights}
         </p>
         <p>{dict.footer.builtWith}</p>
       </Container>

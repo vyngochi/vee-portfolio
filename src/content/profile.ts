@@ -4,7 +4,7 @@ import type { Activity, Education, Profile } from "./types";
 // Bản tiếng Việt do agent dịch từ CV: chủ dự án cần đọc lại cho đúng giọng.
 
 export const profile: Profile = {
-  name: "Ngo Chi Vy", // CV viết không dấu. TODO: xác nhận tên có dấu
+  name: { en: "Ngo Chi Vy", vi: "Ngô Chí Vỹ" },
   role: { en: "Frontend Developer", vi: "Frontend Developer" },
   focus: ["React & Next.js", "Three.js", "UI/UX"],
   tagline: {
@@ -19,7 +19,7 @@ export const profile: Profile = {
       tail: ".",
     },
   },
-  heroWord: "Frontend",
+  heroWord: "Portfolio",
   summary: {
     en: "A frontend developer with a passion for full-stack development, working mainly with React, Next.js and Node.js. I enjoy turning product ideas into real products, working closely with founders, designers and back-end teams, and I am always looking to learn from experienced teams.",
     vi: "Mình là lập trình viên frontend, đam mê phát triển full-stack, làm việc chủ yếu với React, Next.js và Node.js. Mình thích biến ý tưởng sản phẩm thành sản phẩm thật, làm việc sát với founder, designer và đội back-end, và luôn muốn học hỏi từ những đội ngũ giàu kinh nghiệm.",
@@ -56,8 +56,10 @@ export const education: Education = {
 
 export const activities: Activity[] = [
   {
-    title:
-      "Global Hackathon: A New Era of Education, Driving the Future of Learning with AI",
+    title: {
+      en: "Global Hackathon: A New Era of Education, Driving the Future of Learning with AI",
+      vi: "Global Hackathon: A New Era of Education, Driving the Future of Learning with AI",
+    },
     organizer:
       "FPT University, Lead The Change, InnoLab Asia Talent and Republic Polytechnic",
     date: "2026-09",
@@ -67,7 +69,7 @@ export const activities: Activity[] = [
     },
   },
   {
-    title: "Tuoi Tre Start-up Award 2026",
+    title: { en: "Tuoi Tre Start-up Award 2026", vi: "Tuổi Trẻ Start-up Award 2026" },
     // date: CV không ghi tháng
     description: {
       en: "Took part with BeeWise, an EdTech startup project.",
@@ -75,7 +77,7 @@ export const activities: Activity[] = [
     },
   },
   {
-    title: "Startup support scholarship",
+    title: { en: "Startup support scholarship", vi: "Học bổng hỗ trợ khởi nghiệp" },
     organizer: "FPT University",
     // date: CV không ghi tháng
     description: {

@@ -30,6 +30,13 @@ export const en = {
     scroll: "Scroll to explore",
     portraitAlt: "Portrait of {name}",
   },
+  bento: {
+    about: { label: "About" },
+    achievements: { label: "Achievements" },
+    stack: { label: "Tech stack" },
+    education: { label: "Education", gpa: "GPA", graduation: "Expected graduation", languages: "Languages" },
+    now: { label: "Currently", since: "Since" },
+  },
   sections: {
     about: { lead: "A little", accent: "about me" },
     work: { lead: "Selected", accent: "work" },

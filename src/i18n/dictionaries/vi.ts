@@ -3,7 +3,7 @@ import type { Dictionary } from "./en";
 /** Chữ giao diện tiếng Việt. Cấu trúc phải giống hệt en.ts. */
 export const vi: Dictionary = {
   meta: {
-    title: "Ngo Chi Vy · Frontend Developer",
+    title: "Ngô Chí Vỹ · Frontend Developer",
     description: "Lập trình viên frontend làm việc với React, Next.js và Three.js. Dự án tiêu biểu, kinh nghiệm và liên hệ.",
   },
   nav: {
@@ -27,6 +27,13 @@ export const vi: Dictionary = {
   hero: {
     scroll: "Cuộn để xem tiếp",
     portraitAlt: "Ảnh chân dung của {name}",
+  },
+  bento: {
+    about: { label: "Giới thiệu" },
+    achievements: { label: "Thành tích" },
+    stack: { label: "Công nghệ" },
+    education: { label: "Học vấn", gpa: "GPA", graduation: "Dự kiến tốt nghiệp", languages: "Ngoại ngữ" },
+    now: { label: "Hiện tại", since: "Từ" },
   },
   sections: {
     about: { lead: "Một chút", accent: "về mình" },

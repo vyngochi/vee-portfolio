@@ -16,9 +16,9 @@ Kế hoạch triển khai và theo dõi tiến độ toàn dự án. **Đây là
 | --------- | ------------------------------------------------- | ------------ |
 | P0        | Nền tảng                                          | ✅ Xong      |
 | P1        | Khung trang: layout, Nav, Footer                  | ✅ Xong      |
-| P2        | Hero: headline + shader gradient                  | ⬜ Tiếp theo |
-| P3        | About / Bento                                     | ⬜           |
-| P4        | Projects: danh sách, BrowserFrame, trang chi tiết | ⬜           |
+| P2        | Hero: ảnh chân dung + shader gradient             | ✅ Xong      |
+| P3        | About / Bento                                     | ✅ Xong      |
+| P4        | Projects: danh sách, BrowserFrame, trang chi tiết | ⬜ Tiếp theo |
 | P5        | Experience & Activities                           | ⬜           |
 | P6        | Contact                                           | ⬜           |
 | P7        | SEO & metadata                                    | ⬜           |
@@ -71,7 +71,7 @@ Mục tiêu: điểm "wow" của trang, tham khảo `demo/style-demo.html`.
 - [x] **P2.6** Hiệu năng: dừng render khi hero ra khỏi màn hình hoặc tab ẩn, giới hạn pixel ratio, giảm độ phân giải trên mobile
 - [x] **P2.7** `prefers-reduced-motion`: shader đứng yên ở một khung đẹp, headline không chạy animation
 - [x] **P2.8** Headline hiện ra bằng animation `rise` (CSS), chữ luôn đọc được kể cả khi JS chưa chạy
-- [x] **P2.9** Ảnh chân dung tách nền trong hero. Tên một khối một màu ở cột trái (không bao giờ bị ảnh che), chữ trang trí "FRONTEND" nằm sau người, tagline có cụm serif nhấn, parallax theo chuột
+- [x] **P2.9** Ảnh chân dung tách nền trong hero. Tên một khối một màu ở cột trái (không bao giờ bị ảnh che), chữ trang trí "PORTFOLIO" nằm sau người, tagline có cụm serif nhấn, parallax theo chuột
 
 **Tiêu chí xong:** đẹp ở cả hai theme; tắt JS vẫn thấy hero tĩnh đầy đủ chữ; shader không làm tụt FPS khi cuộn trên laptop tầm trung.
 
@@ -79,20 +79,21 @@ Mục tiêu: điểm "wow" của trang, tham khảo `demo/style-demo.html`.
 
 ---
 
-## P3 · About / Bento
+## P3 · About / Bento ✅
 
-Mục tiêu: lưới bento các widget sống, dữ liệu lấy từ `src/content/`.
+Mục tiêu: lưới bento, **mỗi thẻ là thông tin thật từ CV** (`src/content/`) cho nhà tuyển dụng.
 
-- [ ] **P3.1** Lưới bento responsive: 4 cột → 2 cột → 1 cột
-- [ ] **P3.2** Thẻ About: `profile.summary` + chip tech stack từ `skills.ts`
-- [ ] **P3.3** Thẻ Design token: đổi màu accent trực tiếp (`accentPresets`), cả trang và shader đổi theo
-- [ ] **P3.4** Thẻ Motion: so sánh easing linear / ease-out-expo / ease-spring
-- [ ] **P3.5** Thẻ nút nam châm (magnetic button)
-- [ ] **P3.6** Thẻ học vấn: FPT University, GPA, năm tốt nghiệp dự kiến
-- [ ] **P3.7** Thẻ giờ địa phương + trạng thái nhận việc ⏳ (cần thành phố)
-- [ ] **P3.8** Hiệu ứng spotlight theo chuột trên thẻ (chỉ thiết bị có hover)
+- [x] **P3.1** Lưới bento responsive: 4 cột → 2 cột → 1 cột
+- [x] **P3.2** Thẻ About: `profile.summary` (không lặp tagline của hero)
+- [x] **P3.3** ~~Thẻ Design token đổi màu accent~~ → **bỏ**: widget tự nói về trang web, không cho nhà tuyển dụng thông tin gì. Thay bằng thẻ **Thành tích** (`activities`: Tuổi Trẻ Start-up Award, học bổng khởi nghiệp FPT, Global Hackathon)
+- [x] **P3.4** ~~Thẻ Motion minh hoạ easing~~ → **bỏ** (cùng lý do). Thay bằng thẻ Điểm mạnh, rồi **bỏ** (2026-11-06); ngoại ngữ chuyển vào thẻ Học vấn
+- [x] **P3.5** ~~Nút nam châm~~ → **bỏ** (cùng lý do). Thẻ **Công nghệ** riêng với chip từ `skills.ts`
+- [x] **P3.6** Thẻ học vấn: FPT University, GPA, năm tốt nghiệp dự kiến
+- [x] **P3.7** ~~Thẻ giờ địa phương + trạng thái nhận việc~~ → thay bằng thẻ **Hiện tại** (công việc đang làm, từ `experience.ts`). Chủ dự án đã bỏ `availability`; chưa có thành phố
+- [x] **P3.9** Logo hoa (vector, `components/brand/`) bay theo cuộn: mở đầu hoa chạy từ phải sang trái làm chữ PORTFOLIO lộ dần, rồi bay từ hero xuống thẻ About theo tiến độ cuộn (GSAP ScrollTrigger). Mobile / giảm chuyển động: chỉ logo tĩnh ở About
+- [x] **P3.8** Hiệu ứng spotlight theo chuột trên thẻ (chỉ thiết bị có hover)
 
-**Tiêu chí xong:** mọi chữ lấy từ content/từ điển; widget dùng được bằng bàn phím; reduced motion tắt các chuyển động lặp.
+**Tiêu chí xong:** mọi chữ lấy từ content/từ điển; không thẻ nào thiếu thông tin cho nhà tuyển dụng; không lặp nội dung với hero.
 
 ---
 
@@ -121,7 +122,7 @@ Mục tiêu: khoe dự án thật, có khung xem web động và trang chi tiế
 
 - [ ] **P5.1** Timeline kinh nghiệm từ `experience.ts`: công ty, vai trò, thời gian (`formatPeriod`), tóm tắt, điểm nổi bật, stack
 - [ ] **P5.2** Liên kết sang trang dự án qua `projectSlug` (trừ dự án confidential)
-- [ ] **P5.3** Hoạt động & giải thưởng từ `activities`
+- [x] **P5.3** ~~Hoạt động & giải thưởng~~ → đã chuyển lên thẻ Thành tích ở bento (P3.3), không lặp lại ở P5
 - [ ] **P5.4** Animation hiện dần khi cuộn, nhưng nội dung luôn hiện sẵn (không chờ observer)
 
 **Tiêu chí xong:** ngày tháng đúng định dạng ở cả hai ngôn ngữ; đọc tốt ở 375px.
@@ -177,8 +178,8 @@ Mục tiêu: khoe dự án thật, có khung xem web động và trang chi tiế
 
 | Việc                 | Cần cho | Ghi chú                                                            |
 | -------------------- | ------- | ------------------------------------------------------------------ |
-| Tên có dấu           | P1, P2  | CV viết "Ngo Chi Vy"                                               |
-| Thành phố            | P3.7    | Có thể bỏ thẻ giờ địa phương nếu không muốn công khai              |
+| ~~Tên có dấu~~ | ✅ | Đã có: EN "Ngo Chi Vy", VI "Ngô Chí Vỹ" |
+| Thành phố | (tuỳ chọn) | Thẻ giờ địa phương đã thay bằng thẻ Hiện tại; chỉ cần nếu muốn hiện nơi sống |
 | Link BeeWise         | P4.5    | Nếu sản phẩm được công khai                                        |
 | Ảnh chân dung        | P3      | `profile/portrait.jpg`, `avatar.jpg`                               |
 | Ảnh + video dự án    | P4.8    | Xem `docs/IMAGES.md`                                               |
@@ -203,8 +204,12 @@ Mục tiêu: khoe dự án thật, có khung xem web động và trang chi tiế
 | 2026-11-05 | Bỏ next-themes, dùng inline script                                   | next-themes gây cảnh báo script tag với React 19                   |
 | 2026-11-06 | Hero có ảnh chân dung tách nền | Gương mặt dễ nhớ |
 | 2026-11-06 | Tên không nằm sau ảnh; chiều sâu chuyển sang chữ trang trí, cỡ tên theo container query (cqi) | Tên là thông tin quan trọng nhất: phải đọc trọn, một màu, ở mọi kích thước màn hình |
+| 2026-11-06 | Logo hoa vẽ lại thành SVG 10 cánh (file gốc là ảnh raster 2.3 MB) và bay hero → About bằng GSAP ScrollTrigger | Nhẹ, nét ở mọi cỡ, giữ màu thương hiệu; chỉ chạy ở md+ và khi không giảm chuyển động |
+| 2026-11-06 | Bỏ thẻ Điểm mạnh; Công nghệ thành thẻ toàn chiều rộng, mỗi nhóm một cột, mỗi công nghệ một ô logo (`TechTile`) | Soft skill không có bằng chứng; ô logo màu rõ và chuyên nghiệp hơn chip
 | 2026-11-06 | Shader hero bằng WebGL thuần | Một shader phẳng không cần Three.js; nhẹ hơn khoảng 150 KB |
 | 2026-11-06 | Ảnh tách nền dùng `unoptimized` | Bộ tối ưu ảnh của Next trả JPEG, làm mất nền trong suốt |
+| 2026-11-06 | Bỏ thẻ demo (đổi accent, easing, nút nam châm) khỏi bento, thay bằng thông tin thật từ CV | Portfolio để xin việc: mọi thành phần phải cho nhà tuyển dụng thông tin thật (xem mục "Mục đích" trong AGENTS.md) |
+| 2026-11-06 | Tên theo ngôn ngữ (`profile.name` là Localized) | Bản tiếng Việt hiện tên có dấu "Ngô Chí Vỹ" |
 | 2026-11-06 | Smooth scroll bằng CSS, chưa dùng Lenis                              | Đủ cho link neo; Lenis chỉ khi cần đồng bộ animation theo scroll   |
 | 2026-11-06 | Menu mobile dùng `<dialog>` gốc                                      | Trình duyệt lo sẵn focus trap, Esc, trả focus                      |
 | 2026-11-06 | 404 song ngữ qua `[lang]/[...rest]` + `instant = false`              | Giữ Nav, Footer, theme; tắt kiểm tra instant cho route chỉ báo 404 |

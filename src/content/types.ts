@@ -19,7 +19,7 @@ export interface SocialLink {
 }
 
 export interface Profile {
-  name: string;
+  name: Localized;
   /** Vai trò hiển thị ở hero, ví dụ "Frontend Developer" */
   role: Localized;
   /** Các mảng chuyên môn, hiển thị dạng nhãn nhỏ ở hero */
@@ -59,7 +59,8 @@ export interface Education {
 }
 
 export interface Activity {
-  title: string;
+  /** Tên chính thức bằng tiếng Anh thì để giống nhau ở cả hai ngôn ngữ */
+  title: Localized;
   organizer?: string;
   date?: YearMonth;
   description: Localized;
