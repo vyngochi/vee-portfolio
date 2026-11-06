@@ -60,7 +60,7 @@ src/components/layout/   Nav, MobileMenu, Footer, Container, Section, ThemeToggl
 src/lib/sections.ts      Thứ tự và id các section trang chủ (homeSections), MAIN_ID, TOP_ID
 src/components/brand/    Logo hoa (FlowerLogo, vector) và LogoStage (GSAP: hoa bay từ hero xuống About; điểm neo là data-logo-anchor (hero, about, project), chữ là data-logo-word)
 src/components/projects/ BrowserFrame (khung trình duyệt: video / ảnh / iframe), dùng trong khối dự án ở Projects.tsx; media chọn bởi src/lib/project-media.ts
-src/components/sections/ Mỗi section của trang chủ một file: Hero, About, Projects, DesignSystem, Contact
+src/components/sections/ Mỗi section của trang chủ một file: Hero, About, Projects, Experience, Contact
 src/components/bento/    Widget trong lưới bento
 src/components/ui/       shadcn (được sửa thoải mái, code thuộc dự án)
 src/components/reactbits/ React Bits (như trên)

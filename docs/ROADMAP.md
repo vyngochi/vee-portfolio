@@ -120,10 +120,10 @@ Mục tiêu: khoe dự án thật, có khung xem web động và trang chi tiế
 
 ## P5 · Experience & Activities
 
-- [ ] **P5.1** Timeline kinh nghiệm từ `experience.ts`: công ty, vai trò, thời gian (`formatPeriod`), tóm tắt, điểm nổi bật, stack
-- [ ] **P5.2** Liên kết sang trang dự án qua `projectSlug` (trừ dự án confidential)
+- [x] **P5.1** Timeline kinh nghiệm từ `experience.ts`: công ty, vai trò, thời gian (`formatPeriod`), tóm tắt, điểm nổi bật, stack
+- [x] **P5.2** Link nhảy tới khối dự án (`#project-<slug>`) qua `projectSlug`; dự án confidential chỉ ghi nhãn "Dự án nội bộ"
 - [x] **P5.3** ~~Hoạt động & giải thưởng~~ → đã chuyển lên thẻ Thành tích ở bento (P3.3), không lặp lại ở P5
-- [ ] **P5.4** Animation hiện dần khi cuộn, nhưng nội dung luôn hiện sẵn (không chờ observer)
+- [x] **P5.4** ~~Animation hiện dần khi cuộn~~ → bỏ: nội dung hiện sẵn, chỉ có hover nhẹ trên chấm mốc (đúng quy tắc không giấu nội dung chờ cuộn)
 
 **Tiêu chí xong:** ngày tháng đúng định dạng ở cả hai ngôn ngữ; đọc tốt ở 375px.
 
@@ -206,6 +206,7 @@ Mục tiêu: khoe dự án thật, có khung xem web động và trang chi tiế
 | 2026-11-06 | Tên không nằm sau ảnh; chiều sâu chuyển sang chữ trang trí, cỡ tên theo container query (cqi) | Tên là thông tin quan trọng nhất: phải đọc trọn, một màu, ở mọi kích thước màn hình |
 | 2026-11-06 | Logo hoa vẽ lại thành SVG 10 cánh (file gốc là ảnh raster 2.3 MB) và bay hero → About bằng GSAP ScrollTrigger | Nhẹ, nét ở mọi cỡ, giữ màu thương hiệu; chỉ chạy ở md+ và khi không giảm chuyển động |
 | 2026-11-06 | Bỏ thẻ Điểm mạnh; Công nghệ thành thẻ toàn chiều rộng, mỗi nhóm một cột, mỗi công nghệ một ô logo (`TechTile`) | Soft skill không có bằng chứng; ô logo màu rõ và chuyên nghiệp hơn chip
+| 2026-11-06 | Hoa tiếp tục tới chấm mốc đầu timeline Kinh nghiệm rồi chạy dọc đường kẻ theo cuộn tới chấm cuối | Gắn hiệu ứng nền với nội dung thật (mốc thời gian) |
 | 2026-11-06 | Dự án bố trí ziczac; hoa đậu dưới khung từng dự án: cả hai dự án: hoa tự bay nhẹ xuống khi cuộn tới đầu dự án (không theo cuộn), cuộn ngược thì bay lùi; hoa xoay chậm ở cả hai | Tránh hoa bay sang dự án 2 khi chưa đọc xong dự án 1; chỉ md+ và khi không giảm chuyển động |
 | 2026-11-06 | Bỏ trang chi tiết dự án, dùng khối dự án luôn mở ở trang chủ; media chọn theo file có thật trong `public/` (demo.mp4 > 01-home.png > cover.jpg) | Chỉ cần đặt file đúng tên là thay placeholder; Hito Compass không lộ ra ngoài Experience |
 | 2026-11-06 | Shader hero bằng WebGL thuần | Một shader phẳng không cần Three.js; nhẹ hơn khoảng 150 KB |

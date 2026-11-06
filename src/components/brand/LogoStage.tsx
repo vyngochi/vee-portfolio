@@ -66,6 +66,9 @@ export function LogoStage({
           const projectAnchors = Array.from(
             stage.querySelectorAll<HTMLElement>('[data-logo-anchor="project"]'),
           );
+          const nodeAnchors = Array.from(
+            stage.querySelectorAll<HTMLElement>('[data-logo-anchor="node"]'),
+          );
           const geo = () => ({
             hero: place(heroAnchor),
             about: place(aboutAnchor),
@@ -75,6 +78,8 @@ export function LogoStage({
             tech: techAnchor ? place(techAnchor) : null,
             // Ô trống cạnh tiêu đề từng dự án: nơi hoa đậu lại
             projects: projectAnchors.map(place),
+            // Các chấm mốc trên timeline Kinh nghiệm
+            nodes: nodeAnchors.map(place),
           });
           let g = geo();
           gsap.set(flyer, { width: g.hero.w, height: g.hero.h });
@@ -207,6 +212,75 @@ export function LogoStage({
               cleanups.push(() => ScrollTrigger.removeEventListener("refresh", onRefresh));
             });
 
+            // --- Kinh nghiệm: hoa bay tới chấm mốc đầu của timeline (tự chạy, lùi được khi cuộn ngược),
+            // rồi chạy dọc đường kẻ theo tiến độ cuộn tới chấm mốc cuối. ---
+            if (nodeAnchors.length > 0) {
+              const nodeSlot = (i: number) => ({
+                x: g.nodes[i].x + (g.nodes[i].w - g.hero.w) / 2,
+                y: g.nodes[i].y + (g.nodes[i].h - g.hero.h) / 2,
+                scale: g.nodes[i].w / g.hero.w,
+              });
+              const last = projectAnchors.length - 1;
+              const prev = () => (last >= 0 ? slot(last) : techSlot());
+              const prevHue = last >= 0 ? hues[Math.min(last, hues.length - 1)] : 0;
+              const rotN = 720 + 360 * projectAnchors.length;
+              const n = nodeAnchors.length;
+
+              const toNode = gsap.timeline({
+                paused: true,
+                defaults: { duration: 1.6, immediateRender: false },
+              });
+              toNode.fromTo(
+                flyer,
+                { x: () => prev().x },
+                { x: () => nodeSlot(0).x, ease: "power2.inOut" },
+                0,
+              );
+              toNode.fromTo(
+                flyer,
+                { y: () => prev().y, scale: () => prev().scale },
+                { y: () => nodeSlot(0).y, scale: () => nodeSlot(0).scale, ease: "power1.inOut" },
+                0,
+              );
+              toNode.fromTo(
+                flyer,
+                { rotation: rotN, filter: `hue-rotate(${prevHue}deg)` },
+                { rotation: rotN + 360, filter: "hue-rotate(0deg)", ease: "power2.inOut" },
+                0,
+              );
+              const onRefreshNode = () => toNode.invalidate();
+              ScrollTrigger.addEventListener("refresh", onRefreshNode);
+              cleanups.push(() => ScrollTrigger.removeEventListener("refresh", onRefreshNode));
+              ScrollTrigger.create({
+                trigger: nodeAnchors[0],
+                start: "top 80%",
+                onEnter: () => toNode.play(),
+                onLeaveBack: () => toNode.reverse(),
+              });
+
+              if (n > 1) {
+                const mid = (i: number) => g.nodes[i].y + g.nodes[i].h / 2;
+                gsap.fromTo(
+                  flyer,
+                  { x: () => nodeSlot(0).x, y: () => nodeSlot(0).y, rotation: rotN + 360 },
+                  {
+                    x: () => nodeSlot(n - 1).x,
+                    y: () => nodeSlot(n - 1).y,
+                    rotation: rotN + 360 + 720,
+                    ease: "none",
+                    immediateRender: false,
+                    scrollTrigger: {
+                      trigger: stage,
+                      start: () => mid(0) - vh() * 0.35,
+                      end: () => Math.max(mid(0) - vh() * 0.35 + 1, mid(n - 1) - vh() * 0.35),
+                      scrub: 0.6,
+                      invalidateOnRefresh: true,
+                    },
+                  },
+                );
+              }
+            }
+
             // Xoay vòng chậm từ khi hoa đậu ở thẻ Công nghệ tới hết khu vực dự án (xoay phần tử con nên không đụng tới tween bay)
             if (projectAnchors.length > 0) {
               const spin = gsap.to(intro, {
@@ -220,7 +294,7 @@ export function LogoStage({
               ScrollTrigger.create({
                 trigger: techAnchor.closest("article") ?? articles[0],
                 start: "top 90%",
-                endTrigger: articles[articles.length - 1],
+                endTrigger: nodeAnchors[nodeAnchors.length - 1] ?? articles[articles.length - 1],
                 end: "bottom top",
                 onToggle: (self) => (self.isActive ? spin.play() : spin.pause()),
               });

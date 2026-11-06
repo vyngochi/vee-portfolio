@@ -69,6 +69,9 @@ export const en = {
     closeLive: "Back to preview",
     previewAlt: "Preview of {title}",
   },
+  experience: {
+    kind: { internship: "Internship", startup: "Startup", "full-time": "Full-time", freelance: "Freelance" },
+  },
   footer: {
     getInTouch: "Get in touch",
     elsewhere: "Elsewhere",

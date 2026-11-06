@@ -44,7 +44,7 @@ export const vi: Dictionary = {
   sections: {
     about: { lead: "Một chút", accent: "về mình" },
     work: { lead: "Dự án", accent: "Vỹ đã tham gia" },
-    experience: { lead: "Hành trình", accent: "làm việc" },
+    experience: { lead: "Nơi Vỹ đã từng", accent: "làm việc" },
     contact: { lead: "Cùng làm gì đó", accent: "nhé?" },
     placeholder: "Sắp ra mắt",
   },
@@ -66,6 +66,14 @@ export const vi: Dictionary = {
     openLive: "Mở trong tab mới",
     closeLive: "Quay lại bản xem trước",
     previewAlt: "Xem trước {title}",
+  },
+  experience: {
+    kind: {
+      internship: "Thực tập",
+      startup: "Startup",
+      "full-time": "Toàn thời gian",
+      freelance: "Freelance",
+    },
   },
   footer: {
     getInTouch: "Liên hệ",

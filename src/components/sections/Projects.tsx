@@ -39,7 +39,9 @@ export async function Projects() {
           return (
             <article
               key={project.slug}
+              id={`project-${project.slug}`}
               className={cn(
+                "scroll-mt-24",
                 "flex flex-col gap-8 border-b border-border py-10 md:grid md:gap-12",
                 // Ziczac: dự án lẻ khung bên trái, dự án chẵn khung bên phải
                 i % 2 === 0
