@@ -33,7 +33,7 @@ export const projects: Project[] = [
       },
     ],
     stack: ["Next.js", "React", "TypeScript", "Vercel"],
-    // links: { live: "" }, // thêm link sản phẩm nếu được công khai
+    links: { live: "https://www.beewise.vn" },
     featured: true,
   },
   {

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useSyncExternalStore } from "react";
+import { useSyncExternalStore } from "react";
 import { ExternalLink } from "lucide-react";
 import type { ProjectMedia } from "@/lib/project-media";
 
@@ -9,9 +9,7 @@ export interface BrowserFrameLabels {
   frame: string;
   placeholder: string;
   waitingFor: string;
-  loadLive: string;
   openLive: string;
-  closeLive: string;
   alt: string;
 }
 
@@ -23,9 +21,9 @@ function subscribeReduce(cb: () => void) {
 }
 
 /**
- * Khung cửa sổ trình duyệt để xem web động. Ba chế độ: video lặp, ảnh, iframe trang thật. [P4.3]
+ * Khung cửa sổ trình duyệt để xem web động. Hai chế độ: video lặp, ảnh. [P4.3]
  * - Video lặp tự động, không tiếng; bật giảm chuyển động thì không tự phát mà hiện nút điều khiển.
- * - Iframe chỉ nạp khi bấm (nhiều trang chặn nhúng nên luôn kèm link mở tab mới). Chỉ hiện khi có liveUrl.
+ * - Có liveUrl thì thanh địa chỉ kèm link mở trang thật trong tab mới (không nhúng iframe).
  * - Chưa có media: placeholder đúng tỉ lệ, ghi tên file đang chờ.
  */
 export function BrowserFrame({
@@ -40,7 +38,6 @@ export function BrowserFrame({
   liveUrl?: string;
   labels: BrowserFrameLabels;
 }) {
-  const [live, setLive] = useState(false);
   const reduceMotion = useSyncExternalStore(
     subscribeReduce,
     () => window.matchMedia(reduceQuery).matches,
@@ -75,15 +72,7 @@ export function BrowserFrame({
       </div>
 
       <div className="relative aspect-[16/10] bg-muted">
-        {live && liveUrl ? (
-          <iframe
-            src={liveUrl}
-            title={labels.frame}
-            loading="lazy"
-            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-            className="absolute inset-0 size-full bg-background"
-          />
-        ) : media.kind === "video" ? (
+        {media.kind === "video" ? (
           <video
             src={media.src}
             poster={media.poster}
@@ -121,24 +110,6 @@ export function BrowserFrame({
           </div>
         )}
 
-        {liveUrl && !live ? (
-          <button
-            type="button"
-            onClick={() => setLive(true)}
-            className="absolute right-4 bottom-4 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-float transition-transform duration-300 ease-spring hover:-translate-y-0.5"
-          >
-            {labels.loadLive}
-          </button>
-        ) : null}
-        {live ? (
-          <button
-            type="button"
-            onClick={() => setLive(false)}
-            className="absolute right-4 bottom-4 rounded-full bg-background px-4 py-2 text-sm font-semibold shadow-float"
-          >
-            {labels.closeLive}
-          </button>
-        ) : null}
       </div>
     </figure>
   );

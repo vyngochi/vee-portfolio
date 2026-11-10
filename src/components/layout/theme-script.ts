@@ -1,5 +1,6 @@
 /**
- * Theme: lần đầu luôn là light; lựa chọn của người xem lưu ở localStorage["theme"].
+ * Theme: mặc định là dark (server đã render <html class="dark">); lựa chọn của người xem lưu ở localStorage["theme"].
+ * Chỉ khi đã chọn "light" thì mới bỏ class dark.
  * themeScript được chèn vào <head> của root layout và chạy đồng bộ TRƯỚC khi trình duyệt vẽ trang,
  * nên không bị chớp sai màu. Theo hướng dẫn "Preventing flash before hydration" của Next.js.
  * (Thay cho next-themes, vốn gây cảnh báo "Encountered a script tag" với React 19.)
@@ -8,14 +9,14 @@ export const THEME_STORAGE_KEY = "theme";
 
 export type Theme = "light" | "dark";
 
-export const themeScript = `(function(){try{var d=localStorage.getItem("${THEME_STORAGE_KEY}")==="dark";var r=document.documentElement;r.classList.toggle("dark",d);r.style.colorScheme=d?"dark":"light"}catch(e){}})()`;
+export const themeScript = `(function(){try{var d=localStorage.getItem("${THEME_STORAGE_KEY}")!=="light";var r=document.documentElement;r.classList.toggle("dark",d);r.style.colorScheme=d?"dark":"light"}catch(e){}})()`;
 
-/** Đọc lựa chọn đã lưu; không có hoặc không đọc được thì là light. Chỉ gọi ở client. */
+/** Đọc lựa chọn đã lưu; không có hoặc không đọc được thì là dark. Chỉ gọi ở client. */
 export function readStoredTheme(): Theme {
   try {
-    return localStorage.getItem(THEME_STORAGE_KEY) === "dark" ? "dark" : "light";
+    return localStorage.getItem(THEME_STORAGE_KEY) === "light" ? "light" : "dark";
   } catch {
-    return "light";
+    return "dark";
   }
 }
 

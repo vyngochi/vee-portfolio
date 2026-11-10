@@ -44,8 +44,7 @@ export const vi: Dictionary = {
     about: { lead: "Một chút", accent: "về Vỹ" },
     work: { lead: "Dự án", accent: "Vỹ đã tham gia" },
     experience: { lead: "Nơi Vỹ đã từng", accent: "làm việc" },
-    contact: { lead: "Cùng làm gì đó", accent: "nhé?" },
-    placeholder: "Sắp ra mắt",
+    contact: { lead: "Liên hệ với", accent: "Vỹ nhé?" },
   },
   projects: {
     kind: {
@@ -61,9 +60,7 @@ export const vi: Dictionary = {
     browserLabel: "Xem trước dự án",
     placeholder: "Ảnh tạm",
     waitingFor: "Đang chờ",
-    loadLive: "Nạp bản xem trực tiếp",
     openLive: "Mở trong tab mới",
-    closeLive: "Quay lại bản xem trước",
     previewAlt: "Xem trước {title}",
   },
   experience: {
@@ -74,12 +71,17 @@ export const vi: Dictionary = {
       freelance: "Freelance",
     },
   },
+  contact: {
+    intro: "Cảm ơn bạn đã xem, liên hệ với Vỹ tại:",
+    email: "Email",
+    copy: "Sao chép email",
+    copied: "Đã sao chép",
+    portraitAlt: "{name} cầm laptop",
+  },
   footer: {
-    getInTouch: "Liên hệ",
-    elsewhere: "Mạng xã hội",
     backToTop: "Lên đầu trang",
-    rights: "Đã đăng ký bản quyền.",
-    builtWith: "Làm bằng Next.js, Tailwind CSS và một chút WebGL.",
+    rights: "",
+    builtWith: "",
   },
   notFound: {
     title: "Không tìm thấy trang",

@@ -20,7 +20,7 @@ Kế hoạch triển khai và theo dõi tiến độ toàn dự án. **Đây là
 | P3        | About / Bento                                     | ✅ Xong      |
 | P4        | Projects: danh sách, BrowserFrame, trang chi tiết | ⬜ Tiếp theo |
 | P5        | Experience & Activities                           | ⬜           |
-| P6        | Contact                                           | ⬜           |
+| P6        | Contact                                           | 🟡 Đang làm  |
 | P7        | SEO & metadata                                    | ⬜           |
 | P8        | Chất lượng: a11y, hiệu năng, kiểm thử             | ⬜           |
 | P9        | Deploy                                            | ⬜           |
@@ -103,15 +103,15 @@ Mục tiêu: khoe dự án thật, có khung xem web động và trang chi tiế
 
 - [x] **P4.1** Danh sách dự án `featured` dạng hàng lớn, số thứ tự, tag, năm
 - [ ] **P4.2** Preview ảnh/video bay theo chuột khi hover (ẩn trên cảm ứng)
-- [x] **P4.3** Component `BrowserFrame`: khung cửa sổ trình duyệt theo token, ba chế độ:
+- [x] **P4.3** Component `BrowserFrame`: khung cửa sổ trình duyệt theo token, hai chế độ:
   - video lặp tự động, không tiếng (mặc định)
   - ảnh screenshot tự cuộn
-  - iframe trang thật, chỉ nạp khi bấm "Xem trực tiếp" (nhiều trang chặn nhúng)
+  - ~~iframe trang thật~~ → bỏ (2026-11-10): chỉ giữ link "Mở trong tab mới" ở thanh địa chỉ
 - [x] **P4.4** ~~Trang chi tiết `/projects/[slug]`~~ → **bỏ** (2026-11-06): chỉ 2 dự án, mỗi dự án ít nội dung, trang riêng sẽ mỏng. Thay bằng khối luôn mở ngay ở trang chủ (khung nhỏ bên trái, thông tin bên phải), không có chế độ thu gọn
 - [x] **P4.5** Nội dung trong khối dự án: vai trò, thời gian, nhóm, mô tả, điểm nổi bật, stack, link GitHub / trang thật, `BrowserFrame`
 - [x] **P4.6** ~~Điều hướng dự án trước / sau~~ → bỏ cùng P4.4
 - [x] **P4.7** Dự án `confidential` (Hito Compass): không hiện ở mục Dự án, không screenshot, chỉ hiện ở Experience
-- [~] **P4.8** Ảnh và video thật ⏳ chờ ảnh: code đã sẵn, đặt `demo.mp4` / `01-home.png` / `cover.jpg` đúng tên là hiện (cover + `demo.mp4` cho BeeWise, EVCare)
+- [x] **P4.8** Video thật cho BeeWise, EVCare (`demo.mp4`, nén H.264 1280px, không tiếng). `cover.jpg` làm poster là tuỳ chọn
 - [ ] **P4.9** (Tuỳ chọn) Scene 3D nhỏ cho EVCare, gợi lại tính năng 3D của dự án
 
 **Tiêu chí xong:** chưa có ảnh vẫn hiển thị đẹp bằng placeholder; trang chi tiết có metadata riêng; video không tự phát khi bật reduced motion.
@@ -131,8 +131,8 @@ Mục tiêu: khoe dự án thật, có khung xem web động và trang chi tiế
 
 ## P6 · Contact
 
-- [ ] **P6.1** Headline lớn có cụm serif nhấn, email kèm nút Copy (có phản hồi "Đã copy")
-- [ ] **P6.2** Link GitHub, LinkedIn
+- [x] **P6.1** Headline lớn có cụm serif nhấn, email kèm nút Copy (có phản hồi "Đã sao chép"); ảnh `profile/portrait-laptop.webp` bên phải thẻ (mobile: dưới chữ)
+- [x] **P6.2** Link GitHub, LinkedIn. Email và mạng xã hội chỉ còn ở Contact, Footer thu gọn (bản quyền + lên đầu trang) để không lặp
 - [ ] **P6.3** Form liên hệ ⏳ (chờ chọn Formspree / Web3Forms, hay chỉ email)
 - [ ] **P6.4** Nút tải CV ⏳ (chờ bản CV công khai không có số điện thoại trong `public/cv/`)
 
@@ -180,9 +180,8 @@ Mục tiêu: khoe dự án thật, có khung xem web động và trang chi tiế
 | -------------------- | ------- | ------------------------------------------------------------------ |
 | ~~Tên có dấu~~ | ✅ | Đã có: EN "Ngo Chi Vy", VI "Ngô Chí Vỹ" |
 | Thành phố | (tuỳ chọn) | Thẻ giờ địa phương đã thay bằng thẻ Hiện tại; chỉ cần nếu muốn hiện nơi sống |
-| Link BeeWise         | P4.5    | Nếu sản phẩm được công khai                                        |
 | Ảnh chân dung        | P3      | `profile/portrait.jpg`, `avatar.jpg`                               |
-| Ảnh + video dự án    | P4.2, P4.8 | `public/images/projects/beewise/` và `evcare/`: `demo.mp4` (16:10, 5–10 giây, không tiếng, dưới 3 MB), `cover.jpg` 1600×1000. Xem `docs/IMAGES.md` |
+| Ảnh cover dự án (tuỳ chọn) | P4.2 | `public/images/projects/beewise/` và `evcare/`: `cover.jpg` 1600×1000, làm poster khi video đang tải. Xem `docs/IMAGES.md` |
 | Chọn cách liên hệ    | P6.3    | Formspree / Web3Forms / chỉ email                                  |
 | CV công khai         | P6.4    | Bản PDF không có số điện thoại                                     |
 | Duyệt bản tiếng Việt | P8.6    | Toàn bộ `vi` trong `src/content/` và `src/i18n/dictionaries/vi.ts` |
@@ -194,6 +193,8 @@ Mục tiêu: khoe dự án thật, có khung xem web động và trang chi tiế
 
 | Ngày       | Quyết định                                                           | Lý do                                                              |
 | ---------- | -------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| 2026-11-10 | Theme mặc định đổi sang dark; `<html class="dark">` render từ server | Chủ dự án chọn; render sẵn từ server nên không chớp sáng kể cả khi chưa chạy JS |
+| 2026-11-10 | Email + mạng xã hội chỉ ở section Contact, Footer chỉ còn bản quyền và lên đầu trang | Không lặp cùng thông tin ở hai chỗ liền nhau |
 | 2026-11-05 | Next.js thay vì Astro                                                | Chứng minh stack nhà tuyển dụng hay yêu cầu, AI vibe code ổn định  |
 | 2026-11-05 | Style: hero gradient nhiễu hạt + bento + design system               | Kết hợp ảnh tham khảo với ba thế mạnh animation, 3D, design system |
 | 2026-11-05 | Hai theme, light mặc định, hero theo theme                           | Dễ đọc với nhà tuyển dụng; hero giữ điểm nhấn ở cả hai theme       |

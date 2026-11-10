@@ -6,7 +6,7 @@ import type { Activity, Education, Profile } from "./types";
 export const profile: Profile = {
   name: { en: "Ngo Chi Vy", vi: "Ngô Chí Vỹ" },
   role: { en: "Frontend Developer", vi: "Frontend Developer" },
-  focus: ["React & Next.js", "Three.js", "UI/UX"],
+  focus: ["React & Next.js", "UI/UX"],
   tagline: {
     en: {
       lead: "Frontend developer building interfaces",
@@ -15,7 +15,7 @@ export const profile: Profile = {
     },
     vi: {
       lead: "Lập trình viên frontend, làm giao diện",
-      accent: "có chuyển động",
+      accent: "với một ly cà phê",
       tail: ".",
     },
   },

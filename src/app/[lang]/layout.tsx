@@ -59,11 +59,12 @@ export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
   const locale = await getLocale();
   const dict = await getDictionary();
   return (
-    // suppressHydrationWarning: themeScript gắn class "dark" lên <html> trước khi React hydrate
+    // Mặc định dark ngay từ HTML server. suppressHydrationWarning: themeScript bỏ class "dark" (người xem đã chọn light) trước khi React hydrate
     <html
       lang={locale}
       suppressHydrationWarning
-      className={`${manrope.variable} ${playfair.variable} ${anton.variable} ${jetbrains.variable} h-full`}
+      className={`dark ${manrope.variable} ${playfair.variable} ${anton.variable} ${jetbrains.variable} h-full`}
+      style={{ colorScheme: "dark" }}
     >
       <head>
         <InlineScript html={themeScript} />

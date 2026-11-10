@@ -47,8 +47,8 @@ export const experience: Experience[] = [
     end: "2026-04",
     project: "Casio Hito Compass: HR Management System",
     summary: {
-      en: "Internal human resource management system for the Japanese market. I worked on UI maintenance, minor bug fixes and small feature improvements requested by the Project Manager and Technical Leader.",
-      vi: "Hệ thống quản lý nhân sự nội bộ cho thị trường Nhật Bản. Mình bảo trì giao diện, sửa lỗi nhỏ và cải thiện tính năng theo yêu cầu của Project Manager và Technical Leader.",
+      en: "Internal human resource management system for the Japanese market. During my internship, I received training in interface maintenance, minor bug fixing, and feature improvements based on the requirements of the Project Manager and Technical Leader.",
+      vi: "Hệ thống quản lý nhân sự nội bộ cho thị trường Nhật Bản. Mình được đào tạo để bảo trì giao diện, sửa lỗi nhỏ và cải thiện tính năng theo yêu cầu của Project Manager và Technical Leader trong thời gian thực tập.",
     },
     highlights: [
       {

@@ -47,7 +47,6 @@ export const en = {
     work: { lead: "My", accent: "projects" },
     experience: { lead: "Where I've", accent: "worked" },
     contact: { lead: "Let's build something", accent: "together" },
-    placeholder: "Coming soon",
   },
   projects: {
     kind: {
@@ -63,17 +62,25 @@ export const en = {
     browserLabel: "Project preview",
     placeholder: "Placeholder",
     waitingFor: "Waiting for",
-    loadLive: "Load live preview",
     openLive: "Open in a new tab",
-    closeLive: "Back to preview",
     previewAlt: "Preview of {title}",
   },
   experience: {
-    kind: { internship: "Internship", startup: "Startup", "full-time": "Full-time", freelance: "Freelance" },
+    kind: {
+      internship: "Internship",
+      startup: "Startup",
+      "full-time": "Full-time",
+      freelance: "Freelance",
+    },
+  },
+  contact: {
+    intro: "Thank you for viewing my portfolio, please contact me at:",
+    email: "Email",
+    copy: "Copy email",
+    copied: "Copied",
+    portraitAlt: "{name} holding a laptop",
   },
   footer: {
-    getInTouch: "Get in touch",
-    elsewhere: "Elsewhere",
     backToTop: "Back to top",
     rights: "All rights reserved.",
     builtWith: "Built with Next.js, Tailwind CSS and a bit of WebGL.",

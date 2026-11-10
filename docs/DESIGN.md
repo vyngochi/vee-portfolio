@@ -6,7 +6,7 @@ Nguồn sự thật: `src/styles/tokens.css`. Xem trực quan ở route `/tokens
 
 Sâu và có chất liệu: ánh sáng xanh dương như phát ra từ màn hình, bề mặt có nhiễu hạt như phim. Chữ sans rất lớn, sát nhau, tạo khối. Một cụm chữ nghiêng serif màu cam làm điểm nhấn cảm xúc. Chuyển động chậm ở cảnh lớn, nảy nhẹ ở tương tác nhỏ.
 
-Hai theme, **mặc định light** ở lần vào đầu, người xem đổi bằng nút `ThemeToggle` (theme mới lan tròn từ chỗ bấm) và lựa chọn được ghi nhớ.
+Hai theme, **mặc định dark** ở lần vào đầu, người xem đổi bằng nút `ThemeToggle` (theme mới lan tròn từ chỗ bấm) và lựa chọn được ghi nhớ.
 
 - **Light:** nền trắng ngả xanh, hero là sương xanh nhạt với chữ tối.
 - **Dark:** nền gần đen, hero xanh sâu phát sáng với chữ sáng.

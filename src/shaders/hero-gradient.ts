@@ -9,7 +9,7 @@
  *   uMouse   vị trí chuột trong khung, 0..1, gốc ở góc dưới trái
  *   uC0..uC3 bảng màu theo theme (src/styles/tokens.ts → heroShaderPalette)
  *   uAccent  màu primary, tạo quầng ấm quanh con trỏ
- *   uGrain   độ đậm nhiễu hạt
+ *   uGrain   độ đậm nhiễu hạt (hạt đứng yên theo pixel, không đổi theo thời gian để khỏi nhấp nháy)
  */
 
 export const heroVertexShader = /* glsl */ `
@@ -34,6 +34,14 @@ uniform float uGrain;
 
 float hash(vec2 p) {
   return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+}
+
+// Sin-free hash (Dave Hoskins) for the grain: the sin() hash above shows diagonal stripes
+// at large pixel coordinates once the grain stops moving
+float grainHash(vec2 p) {
+  vec3 p3 = fract(vec3(p.xyx) * 0.1031);
+  p3 += dot(p3, p3.yzx + 33.33);
+  return fract((p3.x + p3.y) * p3.z);
 }
 
 float noise(vec2 p) {
@@ -83,8 +91,8 @@ void main() {
   // Pull the top-left edge back to the base color so text stays readable
   col = mix(uC0, col, 0.55 + 0.45 * smoothstep(0.0, 0.6, uv.x + uv.y * 0.3));
 
-  // Film grain
-  col += (hash(gl_FragCoord.xy + fract(uTime * 7.0) * 91.0) - 0.5) * uGrain;
+  // Static film grain: fixed per pixel, never re-rolled per frame (animated grain flickers and glares)
+  col += (grainHash(gl_FragCoord.xy) - 0.5) * uGrain;
 
   gl_FragColor = vec4(col, 1.0);
 }

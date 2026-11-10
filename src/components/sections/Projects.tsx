@@ -58,9 +58,7 @@ export async function Projects() {
                   frame: d.browserLabel,
                   placeholder: d.placeholder,
                   waitingFor: d.waitingFor,
-                  loadLive: d.loadLive,
                   openLive: d.openLive,
-                  closeLive: d.closeLive,
                   alt: d.previewAlt.replace("{title}", project.title),
                 }}
               />
@@ -83,7 +81,8 @@ export async function Projects() {
                   <p className="text-muted-foreground">{t(project.tagline, locale)}</p>
                 </header>
 
-                <dl className="grid gap-x-8 gap-y-3 sm:grid-cols-3">
+                {/* flex-wrap: mỗi mục rộng theo nội dung (số mục 2–3 tuỳ dự án), hết chỗ thì xuống dòng nguyên mục */}
+                <dl className="flex flex-wrap gap-x-10 gap-y-3">
                   {[
                     { label: d.role, value: t(project.role, locale) },
                     {

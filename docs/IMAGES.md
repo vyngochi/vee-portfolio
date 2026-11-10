@@ -17,6 +17,7 @@ Mọi ảnh đặt trong `public/images/`. Trong code gọi bằng đường d�
 public/images/
 ├── profile/                  Ảnh cá nhân
 │   ├── portrait-cutout.webp  ✅ Đã có. Ảnh tách nền (trong suốt), cắt sát người, 866×1476. Dùng ở hero
+│   ├── portrait-laptop.webp  ✅ Đã có. Ảnh tách nền cầm laptop, cắt sát, 1000×897. Dùng ở Contact
 │   ├── avatar.jpg            Ảnh vuông 1:1, 800×800. Dùng cho nav, footer, thẻ About
 │   ├── portrait.jpg          Ảnh dọc 4:5, 1200×1500. Ảnh chính ở phần About
 │   ├── portrait-casual.jpg   Ảnh đời thường, dùng cho hover hoặc ô bento

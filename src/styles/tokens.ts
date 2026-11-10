@@ -43,8 +43,8 @@ export const themeColors = {
  * c0 trùng với --hero-to để mép shader hoà vào fallback CSS.
  */
 export const heroShaderPalette = {
-  light: { c0: "#f5f6fa", c1: "#c8d8fb", c2: "#7aa5f5", c3: "#2f66e0", grain: 0.05 },
-  dark: { c0: "#000000", c1: "#061e57", c2: "#1a7af2", c3: "#6b94d1", grain: 0.09 },
+  light: { c0: "#f5f6fa", c1: "#c8d8fb", c2: "#7aa5f5", c3: "#2f66e0", grain: 0.035 },
+  dark: { c0: "#000000", c1: "#061e57", c2: "#1a7af2", c3: "#6b94d1", grain: 0.06 },
 } as const satisfies Record<ThemeName, { c0: string; c1: string; c2: string; c3: string; grain: number }>;
 
 /** Easing dạng mảng cubic-bezier, dùng trực tiếp với Framer Motion: transition={{ ease: ease.outExpo }} */
